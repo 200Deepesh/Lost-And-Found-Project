@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NavLink } from 'react-router'
 import logo from '/logo.png'
 import { useState } from 'react'
@@ -6,6 +6,11 @@ import { useState } from 'react'
 const Navbar = () => {
 
   const [textColor, setTextColor] = useState('')
+  useEffect(() => {
+    const color = window.location.pathname=='/'?'black':'white';
+    setTextColor(color)
+  }, [])
+  
 
   return (
     <>
