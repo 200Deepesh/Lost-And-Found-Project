@@ -26,7 +26,7 @@ const LostAndFoundLayout = () => {
         <div className='h-2/3 flex'>
           <div id="left" className='h-full'>
             <FilterContextProvider>
-              <Filters />
+              <Filters page={page}/>
             </FilterContextProvider>
           </div>
           <div id="right">

@@ -1,14 +1,16 @@
 import React from 'react'
-import { createContext, useContext, useReducer } from 'react'
+import { createContext, useContext, useReducer, useState } from 'react'
 
 const FilterContext = createContext(null)
 
 export const FilterContextProvider = ({ children }) => {
+  
+  const [isFilterApplied, setIsFilterApplied] = useState(true)
 
   const [filters, updateFilters] = useReducer(filterReducer, initialFilters)
 
   return (
-    <FilterContext.Provider value={{ filters, updateFilters }}>
+    <FilterContext.Provider value={{ filters, updateFilters, setIsFilterApplied, isFilterApplied }}>
       {children}
     </FilterContext.Provider>
   )
