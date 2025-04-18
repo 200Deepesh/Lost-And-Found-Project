@@ -1,19 +1,22 @@
 import React from 'react'
 import { useState, useEffect, useRef } from 'react'
-import { useFilterContext } from '../Context'
+import { useFilterStore } from '../../store'
+import { useShallow } from 'zustand/react/shallow'
 
 const filterButton = ({ filtername, filtervalue }) => {
-    const { filters, updateFilters, setIsFilterApplied } = useFilterContext()
-    let [isSelected, setIsSelected] = useState(false)
+    const { filter, updateFilters, setIsFilterApplied } = useFilterStore(
+            useShallow((state)=>({ filter: state[filtername], updateFilters: state.updateFilters, setIsFilterApplied: state.setIsFilterApplied}))
+        )
+    let [isSelected, setIsSelected] = useState()
     const btn = useRef(null)
 
     useEffect(() => {
-        if (!filters.items.length && !filters.date.length && !filters.location.length) {
+        if (!filter.length) {
             btn.current.style.fontWeight = 500
             btn.current.style.border = ''
+            setIsSelected(false)
         }
-        setIsSelected(false)
-    }, [filters])
+    }, [filter])
 
 
 
@@ -30,7 +33,6 @@ const filterButton = ({ filtername, filtervalue }) => {
             btn.current.style.border = ''
         }
         setIsSelected(!isSelected)
-        console.log(filters)
     }
 
     return (
