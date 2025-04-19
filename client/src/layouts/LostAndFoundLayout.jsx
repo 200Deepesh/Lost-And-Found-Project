@@ -2,8 +2,8 @@ import React from 'react'
 import { useParams } from 'react-router'
 import Notfound from '../components/notfound';
 import Filters from '../components/Filters';
-import { FilterContextProvider } from '../components/Context';
-import { createContext, useState } from 'react';
+import Searchbar from '../components/searchbar';
+import arrowPng from '/arrow.png'
 
 
 const LostAndFoundLayout = () => {
@@ -18,12 +18,13 @@ const LostAndFoundLayout = () => {
   return (
     <>
       <div className='h-full w-full overflow-hidden'>
-        <div className='h-1/3 w-full pt-12 relative bg-[#5849B0] -z-10' style={{ boxShadow: '0px 40px 30px 20px #5849B0' }}>
-          <img src="/background.png" alt="" className='h-[calc(100%+40px)] w-full blur-md absolute opacity-30 top-0 left-0' />
-          <div>params is {page}</div>
-          <div>in LostAndFoundLayout</div>
+        <div className='h-60 w-full pt-12 px-10 relative bg-[#5849B0] flex flex-col justify-evenly' style={{ boxShadow: '0px 40px 30px 20px #5849B0' }}>
+          <img src="/background.png" alt="" className='h-[calc(100%+40px)] w-full blur-md absolute opacity-40 top-0 left-0' />
+          <h1 className='w-fit self-center font-kalam text-5xl font-black text-black relative z-10'>{page=='lost'?'कुछ खो दिए क्या?':'कुछ मिला है क्या ?'}</h1>
+          <h2 className='w-fit self-center left-40 font-kalam text-xl font-bold text-white relative z-10'>{page=='lost'?'आओ साथ में ढूंढे!!':'आओ इसके मालिक को ढूंढे !!'}</h2>
+          <div className='flex relative z-10 items-baseline w-full max-w-[48rem] self-center right-20'><div className='w-96'><Searchbar/></div><img src={arrowPng} alt="" className='h-16 w-64 -rotate-12'/></div>
         </div>
-        <div className='h-2/3 flex'>
+        <div className='h-2/3 flex z-10 relative'>
           <div id="left" className='h-full'>
               <Filters page={page}/>
           </div>

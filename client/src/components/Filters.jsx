@@ -11,7 +11,8 @@ const Filters = ({ page }) => {
     )
     
 
-    const applyFilters = (filters, page)=>{
+    const applyFilters = async (filters, page)=>{
+        'use server'
         //POST REQUEST TO SERVER WITH BODY {FILTERS: FILTERS, TYPE: PAGE}
 
         setIsFilterApplied(true);
@@ -37,7 +38,7 @@ const Filters = ({ page }) => {
                     {((items.length || date.length || location.length) && isFilterApplied) ? <button onClick={(e)=>{updateFilters({ type: 'clear'}); applyFilters({items: items, date: date, location: location}, page)}} className='flex items-center justify-center w-16 h-6 bg-white rounded-full text-xs font-medium'>clear</button> : null}
                     {(!isFilterApplied) ? <button onClick={(e)=>{applyFilters({items: items, date: date, location: location}, page)}} className='flex items-center justify-center w-16 h-6 bg-white rounded-full text-xs font-medium'>apply</button> : null}
                 </div>
-                <div>{items.map((f) => <div key={f}>{f}</div>)}</div>
+                {/* <div>{items.map((f) => <div key={f}>{f}</div>)}</div> */}
             </div>
         </>
     )
