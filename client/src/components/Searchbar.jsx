@@ -13,10 +13,6 @@ const Searchbar = () => {
         // POST REQUEST TO SERVER WITH QUERY
         console.log(`search query is ${query} from ${window.location.pathname}`)
     }
-
-    useEffect(() => {
-      console.log('search bar is rendered')
-    })
     
 
     return (

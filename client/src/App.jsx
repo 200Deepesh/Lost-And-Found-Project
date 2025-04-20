@@ -5,7 +5,7 @@ import Navbar from './components/Navbar'
 import LostAndFoundLayout from './layouts/LostAndFoundLayout'
 import LoginAndSignupLayout from './layouts/LoginAndSignupLayout'
 import Signup from './components/Signup'
-import Login from './components/Login'
+import Signin from './components/Signin'
 import { BrowserRouter, Routes, Route } from 'react-router'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
@@ -24,7 +24,7 @@ function App() {
           </Route>
           <Route element={<LoginAndSignupLayout />}>
             <Route path='/signup' element={<Signup />} />
-            <Route path='/login' element={<Login />} />
+            <Route path='/signin' element={<Signin />} />
           </Route>
         </Routes>
       </BrowserRouter>
