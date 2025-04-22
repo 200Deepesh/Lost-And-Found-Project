@@ -12,25 +12,25 @@ export const useFilterStore = create((set) => ({
                 break;
             case 'remove': set((state) => ({ [action.filterName]: state[action.filterName].filter((filterValue) => filterValue !== action.filterValue) }))
                 break;
-            case 'clear': set((state) => ({ items: [], location: [], date: [] }))
+            case 'clear': set((state)=>({ items: [], location: [], date:[]}))
                 break;
             default: {
                 throw new Error('Unknown action: ' + action.type);
             }
         }
     },
-    setIsFilterApplied: (boolean)=> set((state)=>({ isFilterApplied: boolean}))
+    setIsFilterApplied: (boolean) => set((state) => ({ isFilterApplied: boolean }))
 }))
 
 function BearCounter() {
     const { filters, updateFilters, isFilterApplied, setIsFilterApplied } = useFilterStore(
-            useShallow((state)=>({ filters: { items: state.items, location: state.location, date: state.date }, updateFilters: state.updateFilters, isFilterApplied: state.isFilterApplied, setIsFilterApplied: state.setIsFilterApplied}))
-        )
-        console.log(filters)
-        return filters
-  }
+        useShallow((state) => ({ filters: { items: state.items, location: state.location, date: state.date }, updateFilters: state.updateFilters, isFilterApplied: state.isFilterApplied, setIsFilterApplied: state.setIsFilterApplied }))
+    )
+    console.log(filters)
+    return filters
+}
 
-  
+
 
 
 

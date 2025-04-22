@@ -7,3 +7,26 @@
     --font-kalam: "Kalam", sans-serif;
     --font-poppins: "Poppins", sans-serif;
 }
+
+@layer utilities {
+    .scrollbar::-webkit-scrollbar {
+      width: 0px;
+    }
+  
+    .scrollbar::-webkit-scrollbar-track {
+      border-radius: 100vh;
+      background: transparent;
+    }
+  
+    .scrollbar::-webkit-scrollbar-thumb {
+      background: #e0cbcb;
+      border-radius: 100vh;
+      border: 1px solid #f6f7ed;
+    }
+  
+    .scrollbar::-webkit-scrollbar-thumb:hover {
+      background: transparent;
+    }
+      
+  }
+  
