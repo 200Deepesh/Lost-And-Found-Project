@@ -1,6 +1,7 @@
 import React from 'react'
 import { useLoginStore } from '../store'
 import { useShallow } from 'zustand/react/shallow'
+import { useNavigate } from 'react-router'
 
 const signin = () => {
 
@@ -15,6 +16,8 @@ const signin = () => {
         setErrors: state.setErrors
       }))
   )
+
+  const navigate = useNavigate()
 
   const onSubmit = (formData) => {
     if (!formData.get('emailId')) {
@@ -34,6 +37,7 @@ const signin = () => {
     // POST REQUEST IN SERVER TO LOGIN ROUTE
 
     console.log(data)
+    navigate('/')
   }
 
   return (

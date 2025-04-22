@@ -68,6 +68,14 @@ export const useLoginStore = create((set) => ({
 }))
 
 
+export const useItemStore = create((set) => ({
+    items: [],
+    setItems: (data) => {
+        set(() => ({ items: data }))
+    },
+}))
+
+
 
 
 

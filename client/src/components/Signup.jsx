@@ -1,8 +1,11 @@
 import React from 'react'
 import { useSignupStore } from '../store'
 import { useShallow } from 'zustand/react/shallow'
+import { useNavigate } from 'react-router'
 
 const Signup = () => {
+
+  const navigate = useNavigate()
 
   const { emailId, password, setEmailId, setPassword, errors, setErrors, name, setName, checkbox, setCheckbox } = useSignupStore(
     useShallow((state) => (
@@ -47,6 +50,7 @@ const Signup = () => {
     // POST REQUEST IN SERVER TO SIGNUP ROUTE
 
     console.log(data)
+    navigate('/signin')
   }
 
   return (

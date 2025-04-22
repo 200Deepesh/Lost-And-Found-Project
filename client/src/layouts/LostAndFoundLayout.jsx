@@ -6,9 +6,41 @@ import Searchbar from '../components/searchbar';
 import arrowPng from '/arrow.png'
 import Navbar from '../components/Navbar';
 import ItemCard from '../components/subComponents/ItemCard'
+import { useLocation } from 'react-router';
+import { useEffect } from 'react';
+import { useItemStore } from '../store';
+import { useShallow } from 'zustand/react/shallow';
 
 
 const LostAndFoundLayout = () => {
+  const location = useLocation()
+  const { items, setItems } = useItemStore(
+    useShallow((state) => ({ items: state.items, setItems: state.setItems }))
+  )
+
+  const data = {
+    lost: [
+        {name: 'phone', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png'},
+        {name: 'wallet', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png'},
+        {name: 'assinment', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png'},
+        {name: 'bag', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png'},
+        {name: 'pen', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png'},
+    ],
+    found: [
+        {name: 'phone', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png'},
+        {name: 'wallet', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png'},
+        {name: 'assinment', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png'},
+        {name: 'bag', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png'},
+        {name: 'pen', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png'},
+    ]
+}
+  useEffect(() => {
+    const page = location.pathname.split('/')[1]
+    //POST REQUEST TO SERVER FOR ITEM DATA WITH TYPE
+    setItems(data[page])
+    console.log(page)
+  }, [location])
+
   const { page } = useParams();
 
 
@@ -27,12 +59,13 @@ const LostAndFoundLayout = () => {
           <h2 className='w-fit self-center left-40 font-kalam text-xl font-bold text-white relative z-10'>{page == 'lost' ? 'आओ साथ में ढूंढे!!' : 'आओ इसके मालिक को ढूंढे !!'}</h2>
           <div className='flex relative z-10 items-center gap-4 w-full max-w-[48rem] self-center right-20'><div className='w-96'><Searchbar /></div><img src={arrowPng} alt="" className='h-40 w-64' /></div>
         </div>
-        <div className='min-h-full flex z-100 relative gap-2'>
+        <div className='h-fit flex z-100 relative gap-2'>
           <div id="left" className='min-h-full'>
             <Filters page={page} />
           </div>
-          <div id="right" className='min-h-full overflow-x-auto flex flex-1'>
-            <ItemCard item={{url:'/item.png', name:'name', date:'date', location:'location', discription:'discription'}} />
+          <div id="right" className='min-h-full overflow-x-auto grid-cols-4 grid gap-2 m-auto'>
+          {items.map((item)=> { return <ItemCard item={item} key={item.name}/>})}
+            <ItemCard item={{ url: '/item.png', name: 'name', date: 'date', location: 'location', discription: 'discription' }} />
           </div>
         </div>
       </div>
