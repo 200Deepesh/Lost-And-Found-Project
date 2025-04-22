@@ -1,16 +1,38 @@
 import React from 'react'
-import { useForm } from 'react-hook-form'
+import { useLoginStore } from '../store'
+import { useShallow } from 'zustand/react/shallow'
 
 const signin = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm()
 
-  const onSubmit = (data) => {
+  const { emailId, password, setEmailId, setPassword, errors, setErrors } = useLoginStore(
+    useShallow((state) => (
+      {
+        emailId: state.emailId,
+        password: state.password,
+        setEmailId: state.setEmailId,
+        setPassword: state.setPassword,
+        errors: state.errors,
+        setErrors: state.setErrors
+      }))
+  )
+
+  const onSubmit = (formData) => {
+    if (!formData.get('emailId')) {
+      setErrors({ emailId: { type: 'required', message: 'required' } })
+      return
+    }
+    if (!formData.get('password')) {
+      setErrors({ password: { type: 'required', message: 'required' } })
+      return
+    }
+
+    const data = {
+      emailId: formData.get('emailId'),
+      password: formData.get('password'),
+    }
+
     // POST REQUEST IN SERVER TO LOGIN ROUTE
-    
+
     console.log(data)
   }
 
@@ -20,10 +42,10 @@ const signin = () => {
         <h1 className='font-medium text-2xl'>Welcome back!</h1>
         <h2 className='font-medium text-sm'>Enter your Credentials to access your account</h2>
       </div>
-      <form action={handleSubmit(onSubmit)} className='flex flex-col w-full gap-4'>
+      <form action={onSubmit} className='flex flex-col w-full gap-4'>
         <div className='flex flex-col w-full relative'>
           <label htmlFor="emailId" className='text-[12px] font-medium'>Email address</label>
-          <input type="email" {...register('emailId', { required: { value: true, message: "required" } })} placeholder='Enter your email' className='border border-[#D9D9D9] rounded-lg py-1 px-1 text-[10px]   focus-visible:outline-0 focus-visible:border-black placeholder:text-[8px] placeholder:text-[#D9D9D9] ' />
+          <input type="email" name='emailId' value={emailId} onChange={(e) => { setEmailId(e.target.value) }} placeholder='Enter your email' className='border border-[#D9D9D9] rounded-lg py-1 px-1 text-[10px]   focus-visible:outline-0 focus-visible:border-black placeholder:text-[8px] placeholder:text-[#D9D9D9] ' />
           {errors.emailId && <div className='text-[10px] text-red-500 w-fit absolute right-2 -bottom-4'>{errors.emailId.message}</div>}
         </div>
 
@@ -32,7 +54,7 @@ const signin = () => {
             <label htmlFor="password" className='text-[12px] font-medium'>Password</label>
             <span className='text-[8px] font-medium text-[#0C2A92]'>forget password</span>
           </div>
-          <input type="password" {...register('password', { required: { value: true, message: "required" } })} placeholder='Enter your password' className='border border-[#D9D9D9] rounded-lg py-1 px-1 text-[10px]   focus-visible:outline-0 focus-visible:border-black placeholder:text-[8px] placeholder:text-[#D9D9D9] ' />
+          <input type="password" name='password' value={password} onChange={(e) => { setPassword(e.target.value) }} placeholder='Enter your password' className='border border-[#D9D9D9] rounded-lg py-1 px-1 text-[10px]   focus-visible:outline-0 focus-visible:border-black placeholder:text-[8px] placeholder:text-[#D9D9D9] ' />
           {errors.password && <div className='text-[10px] text-red-500 w-fit absolute right-2 -bottom-4'>{errors.password.message}</div>}
 
         </div>

@@ -12,7 +12,7 @@ export const useFilterStore = create((set) => ({
                 break;
             case 'remove': set((state) => ({ [action.filterName]: state[action.filterName].filter((filterValue) => filterValue !== action.filterValue) }))
                 break;
-            case 'clear': set((state)=>({ items: [], location: [], date:[]}))
+            case 'clear': set((state) => ({ items: [], location: [], date: [] }))
                 break;
             default: {
                 throw new Error('Unknown action: ' + action.type);
@@ -22,14 +22,50 @@ export const useFilterStore = create((set) => ({
     setIsFilterApplied: (boolean) => set((state) => ({ isFilterApplied: boolean }))
 }))
 
-function BearCounter() {
-    const { filters, updateFilters, isFilterApplied, setIsFilterApplied } = useFilterStore(
-        useShallow((state) => ({ filters: { items: state.items, location: state.location, date: state.date }, updateFilters: state.updateFilters, isFilterApplied: state.isFilterApplied, setIsFilterApplied: state.setIsFilterApplied }))
-    )
-    console.log(filters)
-    return filters
-}
+export const useSearchStore = create((set) => ({
+    query: '',
+    setQuery: (input) => {
+        set(() => ({ query: input }))
+    }
+}))
 
+export const useSignupStore = create((set) => ({
+    emailId: '',
+    password: '',
+    name: '',
+    checkbox: false,
+    errors: {},
+    setEmailId: (input) => {
+        set(() => ({ emailId: input }))
+    },
+    setPassword: (input) => {
+        set(() => ({ password: input }))
+    },
+    setName: (input) => {
+        set(() => ({ name: input }))
+    },
+    setErrors: (input) => {
+        set(() => ({ errors: input }))
+    },
+    setCheckbox: (input) => {
+        set(() => ({ checkbox: input }))
+    }
+}))
+
+export const useLoginStore = create((set) => ({
+    emailId: '',
+    password: '',
+    errors: {},
+    setEmailId: (input) => {
+        set(() => ({ emailId: input }))
+    },
+    setPassword: (input) => {
+        set(() => ({ password: input }))
+    },
+    setErrors: (input) => {
+        set(() => ({ errors: input }))
+    }
+}))
 
 
 
