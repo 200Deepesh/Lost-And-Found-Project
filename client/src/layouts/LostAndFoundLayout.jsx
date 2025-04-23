@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams } from 'react-router'
 import Notfound from '../components/notfound';
 import Filters from '../components/Filters';
@@ -10,9 +10,11 @@ import { useLocation } from 'react-router';
 import { useEffect } from 'react';
 import { useItemStore } from '../store';
 import { useShallow } from 'zustand/react/shallow';
+import ItemsInfo from '../components/ItemsInfo';
 
 
 const LostAndFoundLayout = () => {
+  const [itemInfo, setItemInfo] = useState()
   const location = useLocation()
   const { items, setItems } = useItemStore(
     useShallow((state) => ({ items: state.items, setItems: state.setItems }))
@@ -20,18 +22,18 @@ const LostAndFoundLayout = () => {
 
   const data = {
     lost: [
-        {name: 'phone', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png'},
-        {name: 'wallet', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png'},
-        {name: 'assinment', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png'},
-        {name: 'bag', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png'},
-        {name: 'pen', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png'},
+        {name: 'phone', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com'}},
+        {name: 'wallet', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com'}},
+        {name: 'assinment', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com'}},
+        {name: 'bag', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com'}},
+        {name: 'pen', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com'}},
     ],
     found: [
-        {name: 'phone', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png'},
-        {name: 'wallet', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png'},
-        {name: 'assinment', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png'},
-        {name: 'bag', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png'},
-        {name: 'pen', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png'},
+        {name: 'phone', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com'}},
+        {name: 'wallet', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com'}},
+        {name: 'assinment', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com'}},
+        {name: 'bag', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com'}},
+        {name: 'pen', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url:'/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com'}},
     ]
 }
   useEffect(() => {
@@ -64,10 +66,11 @@ const LostAndFoundLayout = () => {
             <Filters page={page} />
           </div>
           <div id="right" className='min-h-full overflow-x-auto grid-cols-4 grid gap-2 m-auto'>
-          {items.map((item)=> { return <ItemCard item={item} key={item.name}/>})}
+          {items.map((item)=> { return <ItemCard item={item} key={item.name} selectItem={()=>{ setItemInfo(item); console.log(!itemInfo)}}/>})}
             <ItemCard item={{ url: '/item.png', name: 'name', date: 'date', location: 'location', discription: 'discription' }} />
           </div>
         </div>
+      { itemInfo && <ItemsInfo itemInfo={itemInfo} deselectItem={()=>{ setItemInfo(null)}}/>}
       </div>
     </>
   )

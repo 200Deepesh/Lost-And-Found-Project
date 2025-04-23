@@ -6,6 +6,8 @@ import LostAndFoundLayout from './layouts/LostAndFoundLayout'
 import LoginAndSignupLayout from './layouts/LoginAndSignupLayout'
 import Signup from './components/Signup'
 import Signin from './components/Signin'
+import ItemsInfo from './components/ItemsInfo'
+import AddItem from './components/AddItem'
 import { BrowserRouter, Routes, Route } from 'react-router'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
@@ -26,6 +28,8 @@ function App() {
             <Route path='/signup' element={<Signup />} />
             <Route path='/signin' element={<Signin />} />
           </Route>
+          <Route path='/item/:id' element={<ItemsInfo/>}/>
+          <Route path='/add/:type' element={<AddItem/>}/>
         </Routes>
       </BrowserRouter>
     </>
