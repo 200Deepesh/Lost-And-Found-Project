@@ -12,12 +12,12 @@ const ItemCard = ({item, selectItem}) => {
             <h4 className='text-sm font-semibold'>{item.name}</h4>
             <div id="info" className='flex flex-col p-2 bg-[#f5f5f5] rounded-md w-48 gap-2'>
                 <div className='flex gap-2'>
-                    <div className='flex items-center justify-center'>
-                        <img src={todayPng} alt="" className='w-4 h-4'/>
+                    <div className='flex items-center justify-center gap-1'>
+                        <img src={todayPng} alt="" className='h-4'/>
                         <span className='text-xs'>{item.date}</span>
                     </div>
-                    <div className='flex items-center justify-center'>
-                        <img src={locationPng} alt="" className='w-4 h-4'/>
+                    <div className='flex items-center justify-center gap-1'>
+                        <img src={locationPng} alt="" className='h-4'/>
                         <span className='text-xs'>{item.location}</span>
                     </div>
                 </div>
