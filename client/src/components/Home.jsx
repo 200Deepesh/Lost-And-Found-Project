@@ -1,16 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Searchbar from './searchbar'
 import { useNavigate } from 'react-router'
 import Navbar from './Navbar'
+import RecentItemsCard from './subComponents/RecentItemsCard'
+import Footer from './Footer'
 
 
 const Home = () => {
+
+  const [recentItems, setRecentItems] = useState({
+    lost: [],
+    found: []
+  })
   const navigate = useNavigate();
+
+  useEffect(() => {
+    //POST REQUEST IN SERVER FOR RECENT LOST AND FOUND DATA
+
+    setRecentItems(hardCodedRecentItems)
+  }, [])
+
 
   return (
     <>
-      <Navbar/>
-      <div className='h-full w-full overflow-hidden'>
+      <Navbar />
+      <div className='h-full w-full overflow-x-auto'>
         <div className='h-full w-full pt-12 relative bg-[#ffffff] overflow-hidden flex items-center justify-center flex-col'>
           <img src="/background.png" alt="" className='h-full w-full blur-sm absolute opacity-50 top-0 left-0' />
           <div className='flex flex-col relative z-10 w-fit items-center justify-center gap-8'>
@@ -27,9 +41,42 @@ const Home = () => {
             </div>
           </div>
         </div>
+        <div className='w-full flex items-center justify-center'>
+        <div className='flex justify-between gap-4 p-4 w-4/5'>
+          <div className='flex gap-4 flex-col'>
+            <h3 className='text-[#90A2C6] font-mrounded font-bold text-xl flex justify-center'>Recent found items</h3>
+            <div className='grid grid-cols-2 gap-y-2 gap-x-3'>
+              {recentItems.found.map((item) => <RecentItemsCard key={item.name} item={item} />)}
+            </div>
+          </div>
+          <div className='w-[2px] bg-[#90A2C6] rounded-full flex'></div>
+          <div className='flex gap-4 flex-col'>
+            <h3 className='text-[#90A2C6] font-mrounded font-bold text-xl flex justify-center'>Recent lost items</h3>
+            <div className='grid grid-cols-2 gap-y-2 gap-x-3'>
+              {recentItems.lost.map((item) => <RecentItemsCard key={item.name} item={item} />)}
+            </div>
+          </div>
+        </div>
+        </div>
+        <Footer />
       </div>
     </>
   )
 }
 
 export default Home
+
+const hardCodedRecentItems = {
+  lost: [
+    { name: 'phone', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url: '/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
+    { name: 'wallet', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url: '/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
+    { name: 'assinment', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url: '/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
+    { name: 'bag', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url: '/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
+  ],
+  found: [
+    { name: 'wallet', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url: '/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
+    { name: 'assinment', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url: '/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
+    { name: 'bag', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url: '/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
+    { name: 'pen', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url: '/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
+  ]
+}
