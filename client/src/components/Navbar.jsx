@@ -2,15 +2,18 @@ import React, { useEffect } from 'react'
 import { NavLink } from 'react-router'
 import logo from '/logo.png'
 import { useState } from 'react'
+import { useUserStore } from '../store'
 
 const Navbar = () => {
 
+  const userId = useUserStore((state) => state.userId)
+
   const [textColor, setTextColor] = useState('')
   useEffect(() => {
-    const color = window.location.pathname=='/'?'black':'white';
+    const color = window.location.pathname == '/' ? 'black' : 'white';
     setTextColor(color)
   }, [])
-  
+
 
   return (
     <>
@@ -31,8 +34,12 @@ const Navbar = () => {
               <li className='text-sm'>Found</li>
             </NavLink>
           </ul>
-          <NavLink to='/signin'><button className='bg-[#594AB1] rounded-full text-xs px-4 py-1 text-white font-light cursor-pointer'>Login</button></NavLink>
-          <NavLink to='/signup'><button className='bg-[#5A7DC2] rounded-full text-xs px-4 py-1 text-white font-light cursor-pointer'>Signup</button></NavLink>
+          {!userId && (
+            <div className='flex gap-4 items-center'>
+              <NavLink to='/signin'><button className='bg-[#594AB1] rounded-full text-xs px-4 py-1 text-white font-light cursor-pointer'>Login</button></NavLink>
+              <NavLink to='/signup'><button className='bg-[#5A7DC2] rounded-full text-xs px-4 py-1 text-white font-light cursor-pointer'>Signup</button></NavLink>
+            </div>
+          )}
         </div>
       </nav>
     </>

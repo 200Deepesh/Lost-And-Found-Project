@@ -14,7 +14,7 @@ const ItemsInfo = ({ itemInfo, deselectItem }) => {
             <div className='bg-white w-fit h-fit rounded-lg overflow-hidden'>
                 <div className='flex justify-between'>
                     <div className='px-4 py-2 bg-[#E65D5D] rounded-br-lg text-white w-fit'>{itemInfo.type}</div>
-                    <div className='px-4 py-2 bg-[#E65D5D]  text-white w-fit' onClick={deselectItem}>X</div>
+                    <div className='px-4 py-2 bg-[#E65D5D]  text-white w-fit cursor-pointer' onClick={deselectItem}>X</div>
                 </div>
                 <div className='flex font-mrounded gap-4 p-2'>
                     <div id="left" className='flex flex-col gap-4'>

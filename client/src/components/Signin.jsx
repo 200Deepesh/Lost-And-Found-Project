@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLoginStore } from '../store'
+import { useLoginStore, useUserStore } from '../store'
 import { useShallow } from 'zustand/react/shallow'
 import { useNavigate } from 'react-router'
 import { authUser } from '../api/user'
@@ -7,7 +7,7 @@ import { setCookies } from '../api/cookies'
 
 const signin = () => {
 
-  const { emailId, password, setEmailId, setPassword, errors, setErrors, resetLoginStates } = useLoginStore(
+  const { emailId, password, setEmailId, setPassword, errors, setErrors, resetAll } = useLoginStore(
     useShallow((state) => (
       {
         emailId: state.emailId,
@@ -16,9 +16,11 @@ const signin = () => {
         setPassword: state.setPassword,
         errors: state.errors,
         setErrors: state.setErrors,
-        resetLoginStates: state.resetLoginStates
+        resetAll: state.resetAll
       }))
   )
+
+  const setUserId = useUserStore((state)=> state.setUserId)
 
   const navigate = useNavigate()
 
@@ -38,19 +40,17 @@ const signin = () => {
     }
 
     // POST REQUEST IN SERVER TO LOGIN ROUTE
-    const isVerified = await authUser(data)
+    const res = await authUser(data)
 
-    console.log(data)
-    console.log(isVerified.errors)
-    if (!isVerified.errors) {
-      setCookies(isVerified)
-      resetLoginStates()
+    if (!res.errors) {
+      setCookies(res)
+      setUserId(data.emailId)
+      resetAll()
       navigate('/')
     }
     else{
-      setErrors(isVerified.errors)
+      setErrors(res.errors)
     }
-    console.log(errors)
   }
 
   return (

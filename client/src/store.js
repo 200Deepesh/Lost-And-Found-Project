@@ -50,8 +50,8 @@ export const useSignupStore = create((set) => ({
     setCheckbox: (input) => {
         set(() => ({ checkbox: input }))
     },
-    reset: () => {
-        set(()=>({
+    resetAll: () => {
+        set(() => ({
             emailId: '',
             password: '',
             name: '',
@@ -74,8 +74,8 @@ export const useLoginStore = create((set) => ({
     setErrors: (input) => {
         set(() => ({ errors: input }))
     },
-    resetLoginStates: () => {
-        set(()=>({
+    resetAll: () => {
+        set(() => ({
             emailId: '',
             password: '',
         }))
@@ -88,6 +88,13 @@ export const useItemStore = create((set) => ({
     setItems: (data) => {
         set(() => ({ items: data }))
     },
+}))
+
+export const useUserStore = create((set) => ({
+    userId: null,
+    setUserId: (id) => {
+        set(() => ({ userId: id }))
+    }
 }))
 
 

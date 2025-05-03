@@ -1,7 +1,6 @@
-import { useState } from 'react'
+import { useEffect } from 'react'
 import Layout from './layouts/Layout'
 import Home from './components/Home'
-import Navbar from './components/Navbar'
 import LostAndFoundLayout from './layouts/LostAndFoundLayout'
 import LoginAndSignupLayout from './layouts/LoginAndSignupLayout'
 import Signup from './components/Signup'
@@ -9,12 +8,20 @@ import Signin from './components/Signin'
 import ItemsInfo from './components/ItemsInfo'
 import AddItem from './components/AddItem'
 import { BrowserRouter, Routes, Route } from 'react-router'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { getCookies } from './api/cookies'
+import { useUserStore } from './store'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const setUserId = useUserStore((state)=> state.setUserId)
+  const userId = useUserStore((state)=> state.userId)
+  useEffect(() => {
+    const id = getCookies('emailId')
+    if(id) setUserId(id)
+    console.log(userId)
+  })
+  
 
   return (
     <>

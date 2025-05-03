@@ -2,12 +2,13 @@ import React from 'react'
 import { useSignupStore } from '../store'
 import { useShallow } from 'zustand/react/shallow'
 import { useNavigate } from 'react-router'
+import { registerUser } from '../api/user'
 
 const Signup = () => {
 
   const navigate = useNavigate()
 
-  const { emailId, password, setEmailId, setPassword, errors, setErrors, name, setName, checkbox, setCheckbox } = useSignupStore(
+  const { emailId, password, setEmailId, setPassword, errors, setErrors, name, setName, checkbox, setCheckbox, resetAll } = useSignupStore(
     useShallow((state) => (
       {
         emailId: state.emailId,
@@ -19,11 +20,12 @@ const Signup = () => {
         name: state.name,
         setName: state.setName,
         checkbox: state.checkbox,
-        setCheckbox: state.setCheckbox
+        setCheckbox: state.setCheckbox,
+        resetAll: state.resetAll
       }))
   )
 
-  const onSubmit = (formData) => {
+  const onSubmit = async (formData) => {
     if (!formData.get('name')) {
       setErrors({ name: { type: 'required', message: 'required' } })
       return
@@ -48,9 +50,16 @@ const Signup = () => {
       checkbox: formData.get('checkbox'),
     }
     // POST REQUEST IN SERVER TO SIGNUP ROUTE
+    const res = await registerUser(data)
+    console.log(res)
 
-    console.log(data)
-    navigate('/signin')
+    if (!res.errors) {
+      resetAll()
+      navigate('/signin')
+    }
+    else{
+      setErrors(res.errors)
+    }
   }
 
   return (
