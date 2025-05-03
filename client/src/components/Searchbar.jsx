@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate, useLocation } from 'react-router'
 import searchPng from '/search.png'
 import { useSearchStore } from '../store'
 import { useShallow } from 'zustand/react/shallow'
@@ -7,14 +8,20 @@ import { useShallow } from 'zustand/react/shallow'
 
 
 const Searchbar = () => {
+    const navigate = useNavigate()
+    const location = useLocation()
 
     const { query, setQuery } = useSearchStore(
         useShallow((state) => ({ query: state.query, setQuery: state.setQuery }))
     )
     const search = async (formData) => {
-        'use server'
+
         const query = formData.get('query')
         // POST REQUEST TO SERVER WITH QUERY
+
+        if(location.pathname == '/'){
+            navigate('/found')
+        }
         console.log(`search query is ${query} from ${window.location.pathname}`)
     }
 
