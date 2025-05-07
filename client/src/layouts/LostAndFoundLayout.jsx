@@ -12,6 +12,7 @@ import { useItemStore } from '../store';
 import { useShallow } from 'zustand/react/shallow';
 import ItemsInfo from '../components/ItemsInfo';
 import addPng from '/add.png'
+import { getItems } from '../api/items';
 
 
 const LostAndFoundLayout = () => {
@@ -23,10 +24,16 @@ const LostAndFoundLayout = () => {
   )
 
   useEffect(() => {
-    const page = location.pathname.split('/')[1]
-    //POST REQUEST TO SERVER FOR ITEM DATA WITH TYPE
-    setItems(hardCodedItems[page])
-    console.log(page)
+    const page = location.pathname.split('/')[1];
+
+    // GET REQUEST TO SERVER FOR ITEM DATA WITH TYPE
+    (async () => {
+      const itemList = await getItems(page)
+      setItems(itemList)
+      console.log(items)
+    }
+    )()
+
   }, [location])
 
   const { page } = useParams();
@@ -58,7 +65,7 @@ const LostAndFoundLayout = () => {
             </div>
           </div>
           <div id="right" className='min-h-full overflow-x-auto grid-cols-4 grid gap-2 m-auto'>
-            {items.map((item) => { return <ItemCard item={item} key={item.name} selectItem={() => { setItemInfo(item); console.log(!itemInfo) }} /> })}
+            {items.map((item) => { return <ItemCard item={item} key={item.id} selectItem={setItemInfo} /> })}
             <ItemCard item={{ url: '/item.png', name: 'name', date: 'date', location: 'location', discription: 'discription' }} />
           </div>
         </div>

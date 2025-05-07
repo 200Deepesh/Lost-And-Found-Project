@@ -7,7 +7,6 @@ import todayPng from '/today.png'
 
 const ItemsInfo = ({ itemInfo, deselectItem }) => {
 
-    const { id } = useParams()
     return (
         <> 
         <div className='w-full h-full absolute top-0 left-0 flex items-center justify-center z-[1000] bg-[#7e7e7e54]  backdrop-blur-xl'>
