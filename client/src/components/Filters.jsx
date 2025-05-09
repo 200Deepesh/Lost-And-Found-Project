@@ -7,7 +7,14 @@ import { useShallow } from 'zustand/react/shallow'
 const Filters = ({ page }) => {
 
     const { items, location, date, updateFilters, isFilterApplied, setIsFilterApplied } = useFilterStore(
-        useShallow((state)=>({ items: state.items, location: state.location, date: state.date, updateFilters: state.updateFilters, isFilterApplied: state.isFilterApplied, setIsFilterApplied: state.setIsFilterApplied}))
+        useShallow((state)=>({ 
+            items: state.items, 
+            location: state.location, 
+            date: state.date, 
+            updateFilters: state.updateFilters, 
+            isFilterApplied: state.isFilterApplied, 
+            setIsFilterApplied: state.setIsFilterApplied
+        }))
     )
     
 

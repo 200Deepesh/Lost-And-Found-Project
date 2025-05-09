@@ -5,10 +5,14 @@ import DateInputField from './subComponents/DateInputField'
 import Notfound from './notfound'
 import Navbar from './Navbar'
 import QuickSearchTags from './subComponents/QuickSearchTags'
-import { ConnectionStates } from 'mongoose'
+import { useNavigate } from 'react-router'
+import CloseBtn from './subComponents/CloseBtn'
+import { addItem } from '../api/items'
+
 
 const AddItem = () => {
   const { type } = useParams()
+  const navigate = useNavigate()
 
   const [inputFile, setInputFile] = useState(null)
   const [studentInfo, setStudentInfo] = useState({
@@ -27,7 +31,7 @@ const AddItem = () => {
   })
   const [errors, setErrors] = useState({})
 
-  const handleSubmit = (formData) => {
+  const handleSubmit = async (formData) => {
     const data = {
       studentInfo: studentInfo,
       itemInfo: itemInfo,
@@ -49,6 +53,12 @@ const AddItem = () => {
     }
 
     //POST REQUEST IN SERVER WITH DATA
+    const res = await addItem({itemInfo, studentInfo})
+    if(res.errors){
+      setErrors(res.errors)
+      return
+    }
+    
     setErrors({})
     setStudentInfo({
       name: '',
@@ -65,6 +75,7 @@ const AddItem = () => {
       discription: '',
     })
     setInputFile(null)
+    navigate(-1)
     console.log(data)
   }
 
@@ -78,18 +89,21 @@ const AddItem = () => {
       <Navbar />
       <div className='w-full h-full flex items-center justify-center bg-[#5849B0]'>
         <form action={handleSubmit} className='w-fit h-fit rounded-xl bg-white p-2 flex flex-col gap-2'>
-          <div className='text-sm flex items-center justify-center h-6 w-20 rounded-full text-white' style={{ backgroundColor: type == 'lost' ? '#E65D5D' : '#6AC25A' }}>{type.toUpperCase()}</div>
+          <div className='flex justify-between'>
+            <div className='text-sm flex items-center justify-center h-6 w-20 rounded-full text-white' style={{ backgroundColor: type == 'lost' ? '#E65D5D' : '#6AC25A' }}>{type.toUpperCase()}</div>
+            <CloseBtn onClick={()=>{ navigate(-1) }}/>
+          </div>
           <div className='flex gap-4'>
             <div id='left' className='w-fit flex flex-col gap-2'>
-              <FileInputField inputFile={inputFile} setInputFile={setInputFile}/>
+              <FileInputField inputFile={inputFile} setInputFile={setInputFile} />
               <div className='w-full border-2 border-[#D9D9D9] box-border rounded-xl p-2 flex flex-col gap-2'>
                 <div className='relative'>
-                  <input type="text" name='name' value={studentInfo.name} onChange={(e) => { setStudentInfo({ ...studentInfo, [e.target.name]: e.target.value }) }} placeholder='Name' className=' w-full max-w-40 border border-[#D9D9D9] rounded-full py-1 px-2 text-[12px]  focus-visible:outline-0 focus-visible:border-black placeholder:text-[12px] placeholder:text-[#00000066] ' />
+                  <input type="text" name='name' value={studentInfo?.name} onChange={(e) => { setStudentInfo({ ...studentInfo, [e.target.name]: e.target.value }) }} placeholder='Name' className=' w-full max-w-40 border border-[#D9D9D9] rounded-full py-1 px-2 text-[12px]  focus-visible:outline-0 focus-visible:border-black placeholder:text-[12px] placeholder:text-[#00000066] ' />
                   {errors?.studentInfo?.name && <div className='text-[10px] text-red-500 w-fit absolute right-1 top-1.5'>{errors?.studentInfo?.name.message}</div>}
                 </div>
 
                 <div className='relative'>
-                  <select name='branch' onChange={(e) => { setStudentInfo({ ...studentInfo, [e.target.name]: e.target.value }); console.log(studentInfo) }} className='w-full max-w-40 border border-[#D9D9D9] rounded-full py-1 px-2 text-[12px]  focus-visible:outline-0 focus-visible:border-black' style={{ color: studentInfo.branch ? 'black' : '#00000066' }}>
+                  <select name='branch' onChange={(e) => { setStudentInfo({ ...studentInfo, [e.target.name]: e.target.value }); console.log(studentInfo) }} className='w-full max-w-40 border border-[#D9D9D9] rounded-full py-1 px-2 text-[12px]  focus-visible:outline-0 focus-visible:border-black' style={{ color: studentInfo?.branch ? 'black' : '#00000066' }}>
                     <option value="" className=''>Branch</option>
                     <option value='AIDS'>AIDS</option>
                     <option value='CE'>CE</option>
@@ -118,11 +132,11 @@ const AddItem = () => {
                 </div>
 
                 <div className='relative'>
-                  <input type="text" name='phoneNo' value={studentInfo.phoneNo} onChange={(e) => { setStudentInfo({ ...studentInfo, [e.target.name]: e.target.value }) }} placeholder='Phone No.' className=' w-full max-w-40 border border-[#D9D9D9] rounded-full py-1 px-2 text-[12px]  focus-visible:outline-0 focus-visible:border-black placeholder:text-[12px] placeholder:text-[#00000066] ' />
+                  <input type="text" name='phoneNo' value={studentInfo?.phoneNo} onChange={(e) => { setStudentInfo({ ...studentInfo, [e.target.name]: e.target.value }) }} placeholder='Phone No.' className=' w-full max-w-40 border border-[#D9D9D9] rounded-full py-1 px-2 text-[12px]  focus-visible:outline-0 focus-visible:border-black placeholder:text-[12px] placeholder:text-[#00000066] ' />
                   {errors?.studentInfo?.phoneNo && <div className='text-[10px] text-red-500 w-fit absolute right-1 top-1.5'>{errors?.studentInfo?.phoneNo.message}</div>}
                 </div>
                 <div className='relative'>
-                  <input type="email" name='emailId' value={studentInfo.emailId} onChange={(e) => { setStudentInfo({ ...studentInfo, [e.target.name]: e.target.value }) }} placeholder='Email ID' className=' w-full max-w-40 border border-[#D9D9D9] rounded-full py-1 px-2 text-[12px]  focus-visible:outline-0 focus-visible:border-black placeholder:text-[12px] placeholder:text-[#00000066] ' />
+                  <input type="email" name='emailId' value={studentInfo?.emailId} onChange={(e) => { setStudentInfo({ ...studentInfo, [e.target.name]: e.target.value }) }} placeholder='Email ID' className=' w-full max-w-40 border border-[#D9D9D9] rounded-full py-1 px-2 text-[12px]  focus-visible:outline-0 focus-visible:border-black placeholder:text-[12px] placeholder:text-[#00000066] ' />
                   {errors?.studentInfo?.emailId && <div className='text-[10px] text-red-500 w-fit absolute right-1 top-1.5'>{errors?.studentInfo?.emailId.message}</div>}
                 </div>
               </div>
