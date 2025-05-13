@@ -1,10 +1,14 @@
 import { create } from 'zustand'
-import { useShallow } from 'zustand/react/shallow';
 
-export const useFilterStore = create((set) => ({
+const initialFilterStates = {
     items: [],
     location: [],
     date: [],
+}
+export const useFilterStore = create((set) => ({
+
+    ...initialFilterStates,
+
     isFilterApplied: true,
     updateFilters: (action) => {
         switch (action.type) {
@@ -12,7 +16,7 @@ export const useFilterStore = create((set) => ({
                 break;
             case 'remove': set((state) => ({ [action.filterName]: state[action.filterName].filter((filterValue) => filterValue !== action.filterValue) }))
                 break;
-            case 'clear': set((state) => ({ items: [], location: [], date: [] }))
+            case 'clear': set((state) => ({ ...initialFilterStates }))
                 break;
             default: {
                 throw new Error('Unknown action: ' + action.type);
@@ -29,12 +33,18 @@ export const useSearchStore = create((set) => ({
     }
 }))
 
-export const useSignupStore = create((set) => ({
+
+const initialSignupStates = {
     emailId: '',
     password: '',
     name: '',
     checkbox: false,
     errors: {},
+}
+export const useSignupStore = create((set) => ({
+
+    ...initialSignupStates,
+
     setEmailId: (input) => {
         set(() => ({ emailId: input }))
     },
@@ -52,19 +62,21 @@ export const useSignupStore = create((set) => ({
     },
     resetAll: () => {
         set(() => ({
-            emailId: '',
-            password: '',
-            name: '',
-            checkbox: false,
-            errors: {},
+            ...initialSignupStates
         }))
     }
 }))
 
-export const useLoginStore = create((set) => ({
+
+const initialLoginState = {
     emailId: '',
     password: '',
     errors: {},
+}
+export const useLoginStore = create((set) => ({
+
+    ...initialLoginState,
+
     setEmailId: (input) => {
         set(() => ({ emailId: input }))
     },
@@ -76,8 +88,7 @@ export const useLoginStore = create((set) => ({
     },
     resetAll: () => {
         set(() => ({
-            emailId: '',
-            password: '',
+            ...initialLoginState,
         }))
     }
 }))
@@ -97,6 +108,42 @@ export const useUserStore = create((set) => ({
     }
 }))
 
+const initialAddItemState = {
+    inputFile: null,
+    studentInfo: {
+        name: '',
+        branch: '',
+        sem: '',
+        phoneNo: '',
+        emailId: '',
+    },
+    itemInfo: {
+        name: '',
+        location: '',
+        date: '',
+        quickSearchTags: [],
+        discription: '',
+    },
+    errors: {}
+}
+export const useAddItemStore = create((set) => ({
+    ...initialAddItemState,
+    setInputFile: (file) => {
+        set((state) => ({ inputFile: file }))
+    },
+    setStudentInfo: (key, value) => {
+        set((state) => ({ studentInfo: { ...state.studentInfo, [key]: value } }))
+    },
+    setItemInfo: (key, value) => {
+        set((state) => ({ itemInfo: { ...state.itemInfo, [key]: value } }))
+    },
+    setErrors: (errObj) => {
+        set((state) => ({ errors: errObj }))
+    },
+    resetAll: () => {
+        set(() => ({ ...initialAddItemState }))
+    }
+}))
 
 
 
