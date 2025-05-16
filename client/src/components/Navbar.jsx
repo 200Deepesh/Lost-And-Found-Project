@@ -17,13 +17,13 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className='flex justify-between items-center px-4 py-2 fixed w-dvw z-100 font-poppins' style={{ color: textColor }}>
+      <nav className='flex justify-between items-center min-[28rem]:px-4 px-2 py-2 w-dvw z-100 font-poppins absolute top-0' style={{ color: textColor }}>
         <div className='flex gap-1 items-center'>
           <img src={logo} alt="" className='w-6 h-6' />
           <span className='font-mrounded font-bold text-xl'>Findoro</span>
         </div>
-        <div className='flex items-center gap-4'>
-          <ul className='flex gap-4'>
+        <div className='flex items-center min-[28rem]:gap-4 gap-2'>
+          <ul className='flex sm:gap-4 gap-2'>
             <NavLink to='/' className={({ isActive }) => isActive ? "font-medium" : "font-light"} onClick={(isActive) => { if (isActive && textColor != 'black') setTextColor('black') }}>
               <li className='text-sm'>Home</li>
             </NavLink>
@@ -35,9 +35,9 @@ const Navbar = () => {
             </NavLink>
           </ul>
           {!userId && (
-            <div className='flex gap-4 items-center'>
-              <NavLink to='/signin'><button className='bg-[#594AB1] rounded-full text-xs px-4 py-1 text-white font-light cursor-pointer'>Login</button></NavLink>
-              <NavLink to='/signup'><button className='bg-[#5A7DC2] rounded-full text-xs px-4 py-1 text-white font-light cursor-pointer'>Signup</button></NavLink>
+            <div className='flex sm:gap-4 gap-2 items-center'>
+              <NavLink to='/signin'><button className='bg-[#594AB1] rounded-full text-xs min-[28rem]:px-4 px-3 py-1 text-white font-light cursor-pointer'>Login</button></NavLink>
+              <NavLink to='/signup'><button className='bg-[#5A7DC2] rounded-full text-xs min-[28rem]:px-4 px-3 py-1 text-white font-light cursor-pointer'>Signup</button></NavLink>
             </div>
           )}
         </div>

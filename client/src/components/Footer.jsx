@@ -7,9 +7,12 @@ import instagramLogo from '/Instagram.svg'
 const Footer = () => {
   return (
     <>
-      <footer className='w-full bg-[#594AB1] flex items-center justify-center'>
-        <div className='w-4/5  text-white px-4 py-2 font-jakarta gap-4 flex flex-col'>
-          <div className='flex justify-between'>
+      <footer
+        className='w-full bg-[#594AB1] flex items-center justify-center text-xl'>
+        <div
+          className='lg:w-4/5 min-[60rem]:w-11/12 w-full flex-col text-white px-4 py-2 font-jakarta gap-4 flex'>
+          <div
+            className='flex justify-between max-sm:w-96 max-sm:self-center sm:flex-row flex-col'>
             <div className='flex flex-col gap-2'>
               <div className='flex flex-col'>
                 <img src={logo} alt="" className='w-8 h-8' />
@@ -28,7 +31,7 @@ const Footer = () => {
                 </div>
               </div>
             </div>
-            <div className='flex gap-16'>
+            <div className='flex md:gap-16 gap-8'>
               <div className='flex flex-col gap-6 w-28'>
                 <span className='flex h-8 items-center text-[16px] font-medium'>About</span>
                 <ul className='flex flex-col gap-4 text-xs'>
@@ -45,7 +48,7 @@ const Footer = () => {
                   <li>Invite a friend</li>
                 </ul>
               </div>
-              <div className='flex flex-col gap-6 w-28'>
+              <div className='flex flex-col gap-6 sm:w-28'>
                 <span className='flex h-8 items-center text-[16px] font-medium'>Socials</span>
                 <ul className='flex flex-col gap-4 text-xs'>
                   <li>Discord</li>
@@ -57,7 +60,7 @@ const Footer = () => {
             </div>
           </div>
           <div className='w-4/5 h-[2px] bg-white rounded-full self-center'></div>
-          <div className='flex text-[10px] w-full justify-between py-2'>
+          <div className='flex text-[10px] w-full flex-col items-center gap-2 min-[28rem]:justify-between min-[28rem]:flex-row py-2'>
             <div className=''>©2025  Findoro. All rights reserved</div>
             <div className='flex gap-8'>
               <div>Privacy & Policy</div>

@@ -46,9 +46,9 @@ const LostAndFoundLayout = () => {
 
   return (
     <>
-      <Navbar />
       <div className='h-full w-full overflow-x-auto scrollbar'>
-        <div className='h-96 w-full pt-12 px-10 relative bg-[#5849B0] flex flex-col justify-evenly' style={{ boxShadow: '0px 40px 30px 20px #5849B0' }}>
+        <div className='h-96 w-full pt-12 relative bg-[#5849B0] flex flex-col justify-evenly' style={{ boxShadow: '0px 40px 30px 20px #5849B0' }}>
+          <Navbar />
           <img src="/background.png" alt="" className='h-[calc(100%+40px)] w-full blur-md absolute opacity-40 top-0 left-0' />
           <h1 className='w-fit self-center font-kalam text-5xl font-black text-black relative z-10'>{page == 'lost' ? 'कुछ खो दिए क्या?' : 'कुछ मिला है क्या ?'}</h1>
           <h2 className='w-fit self-center left-40 font-kalam text-xl font-bold text-white relative z-10'>{page == 'lost' ? 'आओ साथ में ढूंढे!!' : 'आओ इसके मालिक को ढूंढे !!'}</h2>
