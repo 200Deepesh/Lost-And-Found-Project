@@ -14,7 +14,7 @@ const LoginAndSignupLayout = () => {
   return (
     <>
       <div className='w-full h-full flex'>
-        <div className='h-full w-1/2 flex justify-center items-center'>
+        <div className='h-full flex justify-center items-center flex-1'>
           <img onClick={()=>{ navigate(-1)}} src={arrowPng} alt="" className='w-8 h-8 absolute top-2 left-2 z-10' />
           <div className='flex justify-center items-center flex-col gap-8'>
             <Outlet />
@@ -42,7 +42,7 @@ const LoginAndSignupLayout = () => {
             </div>
           </div>
         </div>
-        <div className='h-full w-1/2 relative bg-[#5849B0] overflow-hidden rounded-l-3xl'>
+        <div className='h-full md:w-1/2 w-2/5 relative bg-[#5849B0] overflow-hidden rounded-l-3xl min-[36rem]:flex hidden'>
           <img src={backgroundImg} alt="" className='h-full w-full blur-md absolute opacity-30 top-0 left-0' />
         </div>
       </div>
