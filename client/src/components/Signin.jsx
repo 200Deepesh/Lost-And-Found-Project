@@ -43,7 +43,7 @@ const signin = () => {
     const res = await authUser(data)
 
     if (!res.errors) {
-      setCookies(res)
+      setCookies({user: JSON.stringify(res)})
       setUserId(data.emailId)
       resetAll()
       navigate('/')

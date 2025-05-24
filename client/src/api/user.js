@@ -1,4 +1,3 @@
-import { setCookies } from "./cookies"
 
 export const authUser = async (userInfo) => {
 

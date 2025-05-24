@@ -10,6 +10,7 @@ import AddItem from './components/AddItem'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router'
 import { getCookies } from './api/cookies'
 import { useUserStore } from './store'
+import Profile from './components/Profile'
 import './App.css'
 
 function App() {
@@ -17,7 +18,8 @@ function App() {
   const setUserId = useUserStore((state) => state.setUserId)
   const userId = useUserStore((state) => state.userId)
   useEffect(() => {
-    const id = getCookies('emailId')
+    const user = getCookies('user')
+    const id = user? JSON.parse(user).emailId : null
     if (id) setUserId(id)
     console.log(userId)
   })
@@ -43,6 +45,7 @@ function App() {
           </Route>
           <Route path='/item/:id' element={<ItemsInfo />} />
           <Route path='/add/:type' element={<AddItem />} />
+          <Route path='/user/:id' element={<Profile />} />
         </Routes>
       </BrowserRouter>
     </>

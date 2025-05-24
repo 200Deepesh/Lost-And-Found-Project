@@ -46,18 +46,41 @@ const LostAndFoundLayout = () => {
 
   return (
     <>
-      <div className='h-full w-full overflow-x-auto scrollbar'>
-        <div className='h-96 w-full pt-12 relative bg-[#5849B0] flex flex-col justify-evenly' style={{ boxShadow: '0px 40px 30px 20px #5849B0' }}>
-          <Navbar />
-          <img src="/background.png" alt="" className='h-[calc(100%+40px)] w-full blur-md absolute opacity-40 top-0 left-0' />
-          <h1 className='w-fit self-center font-kalam text-5xl font-black text-black relative z-10'>{page == 'lost' ? 'कुछ खो दिए क्या?' : 'कुछ मिला है क्या ?'}</h1>
-          <h2 className='w-fit self-center left-40 font-kalam text-xl font-bold text-white relative z-10'>{page == 'lost' ? 'आओ साथ में ढूंढे!!' : 'आओ इसके मालिक को ढूंढे !!'}</h2>
-          <div className='flex relative z-10 items-center gap-4 w-full max-w-[48rem] self-center right-20'><div className='w-96'><Searchbar /></div><img src={arrowPng} alt="" className='h-40 w-64' /></div>
+      <div
+        className='h-full w-full overflow-x-auto scrollbar'>
+        <div
+          className='h-96 w-full pt-12 relative bg-[#5849B0] flex flex-col justify-evenly'
+          style={{ boxShadow: '0px 40px 30px 20px #5849B0' }}>
+          <Navbar theme='dark'/>
+          <img
+            src="/background.png"
+            alt=""
+            className='h-[calc(100%+40px)] w-full blur-md absolute opacity-40 top-0 left-0' />
+          <h1
+            className='w-fit self-center font-kalam text-5xl font-black text-black relative z-10'>
+            {page == 'lost' ? 'कुछ खो दिए क्या?' : 'कुछ मिला है क्या ?'}
+          </h1>
+          <h2
+            className='w-fit self-center left-40 font-kalam text-xl font-bold text-white relative z-10'>
+            {page == 'lost' ? 'आओ साथ में ढूंढे!!' : 'आओ इसके मालिक को ढूंढे !!'}
+          </h2>
+          <div
+            className='flex relative z-10 items-center gap-4 w-full max-w-[48rem] self-center right-20'>
+            <div className='w-96'><Searchbar /></div>
+            <img src={arrowPng} alt="" className='h-40 w-64' />
+          </div>
         </div>
-        <div className='h-fit flex z-100 relative gap-2'>
-          <div id="left" className='min-h-full flex flex-col gap-1'>
-            <div onClick={() => { navigate(`/add/${page}`) }} className='flex bg-black text-white font-poppins text-xs items-center rounded-r-full p-1 cursor-pointer'>
-              <span className='flex flex-1 justify-center'>Add {page.charAt(0).toUpperCase() + page.slice(1)} Item</span>
+        <div
+          className='h-fit flex z-100 relative gap-2'>
+          <div id="left"
+            className='min-h-full flex flex-col gap-1'>
+            <div
+              onClick={() => { navigate(`/add/${page}`) }}
+              className='flex bg-black text-white font-poppins text-xs items-center rounded-r-full p-1 cursor-pointer'>
+              <span
+                className='flex flex-1 justify-center'>
+                Add {page.charAt(0).toUpperCase() + page.slice(1)} Item
+              </span>
               <img src={addPng} alt="" className='w-10' />
             </div>
             <div className='flex flex-1'>

@@ -27,7 +27,7 @@ const Home = () => {
         className='h-full w-full overflow-x-auto'>
         <div
           className='h-full w-full max-h-[40rem] pt-12 relative bg-[#ffffff] overflow-hidden flex items-center justify-center flex-col'>
-            <Navbar />
+            <Navbar theme='light'/>
           <img
             src="/background.png"
             alt=""

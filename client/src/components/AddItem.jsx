@@ -71,8 +71,8 @@ const AddItem = () => {
 
   return (
     <>
-      <Navbar />
-      <div className='w-full h-full flex items-center justify-center bg-[#5849B0]'>
+      <div className='w-full min-h-fit h-full pt-12 flex items-center justify-center bg-[#5849B0]'>
+      <Navbar theme='dark'/>
         <form action={handleSubmit} className='w-fit h-fit rounded-xl bg-white p-2 flex flex-col gap-2'>
           <div className='flex justify-between'>
             <div className='text-sm flex items-center justify-center h-6 w-20 rounded-full text-white' style={{ backgroundColor: type == 'lost' ? '#E65D5D' : '#6AC25A' }}>{type.toUpperCase()}</div>

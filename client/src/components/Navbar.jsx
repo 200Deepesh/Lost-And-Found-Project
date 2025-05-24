@@ -3,14 +3,15 @@ import { NavLink } from 'react-router'
 import logo from '/logo.png'
 import { useState } from 'react'
 import { useUserStore } from '../store'
+import Dropdown from './subComponents/Dropdown'
 
-const Navbar = () => {
+const Navbar = ({ theme }) => {
 
   const userId = useUserStore((state) => state.userId)
 
   const [textColor, setTextColor] = useState('')
   useEffect(() => {
-    const color = window.location.pathname == '/' ? 'black' : 'white';
+    const color = theme == 'light' ? 'black' : 'white';
     setTextColor(color)
   }, [])
 
@@ -34,12 +35,14 @@ const Navbar = () => {
               <li className='text-sm'>Found</li>
             </NavLink>
           </ul>
-          {!userId && (
-            <div className='flex sm:gap-4 gap-2 items-center'>
-              <NavLink to='/signin'><button className='bg-[#594AB1] rounded-full text-xs min-[28rem]:px-4 px-3 py-1 text-white font-light cursor-pointer'>Login</button></NavLink>
-              <NavLink to='/signup'><button className='bg-[#5A7DC2] rounded-full text-xs min-[28rem]:px-4 px-3 py-1 text-white font-light cursor-pointer'>Signup</button></NavLink>
-            </div>
-          )}
+          <div className='flex sm:gap-4 gap-2 items-center'>
+            {!userId
+              ? (<>
+                <NavLink to='/signin'><button className='bg-[#594AB1] rounded-full text-xs min-[28rem]:px-4 px-3 py-1 text-white font-light cursor-pointer'>Login</button></NavLink>
+                <NavLink to='/signup'><button className='bg-[#5A7DC2] rounded-full text-xs min-[28rem]:px-4 px-3 py-1 text-white font-light cursor-pointer'>Signup</button></NavLink>
+              </>)
+              : (<> <Dropdown /></>)}
+          </div>
         </div>
       </nav>
     </>
