@@ -44,7 +44,7 @@ const ItemsInfo = ({ itemInfo, deselectItem }) => {
                                 <img src={todayPng} alt="" className='h-6' />
                                 <span>{itemInfo.date}</span>
                             </div>
-                            <div className='border-2 border-[#D9D9D9] rounded-2xl w-96 p-1 gap-2 flex flex-col flex-1'>
+                            <div className='border-2 border-[#D9D9D9] rounded-2xl w-80 min-h-36 p-1 gap-2 flex flex-col flex-1'>
                                 <h3 className='font-semibold text-lg'>Discription</h3>
                                 <div className='text-sm'>{itemInfo.discription}</div>
                             </div>

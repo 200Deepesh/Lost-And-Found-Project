@@ -12,7 +12,7 @@ const ItemCard = ({ item, selectItem }) => {
     }
 
     return (
-        <div className='border border-[#C7C7CC] bg-white flex flex-col p-2 rounded-2xl w-fit h-fit font-poppins gap-1' onClick={handleClick}>
+        <div className='border border-[#C7C7CC] bg-white flex flex-col p-2 rounded-2xl w-fit h-fit font-poppins gap-1 break-inside-avoid-column' onClick={handleClick}>
             <div className='w-48 h-48'>
                 <img src={item.url} alt="" className='object-cover w-48 h-48' />
             </div>

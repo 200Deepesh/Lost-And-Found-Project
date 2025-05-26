@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { useParams } from 'react-router'
 import Notfound from '../components/notfound';
 import Filters from '../components/Filters';
@@ -13,10 +13,14 @@ import { useShallow } from 'zustand/react/shallow';
 import ItemsInfo from '../components/ItemsInfo';
 import addPng from '/add.png'
 import { getItems } from '../api/items';
+import FilterOnSvg from '/filter.svg'
+import FilterOffSvg from '/filterOff.svg'
 
 
 const LostAndFoundLayout = () => {
   const navigate = useNavigate()
+  const filterBar = useRef(null)
+  const filterDisplayBtn = useRef(null)
   const [itemInfo, setItemInfo] = useState()
   const location = useLocation()
   const { items, setItems } = useItemStore(
@@ -51,7 +55,7 @@ const LostAndFoundLayout = () => {
         <div
           className='h-96 w-full pt-12 relative bg-[#5849B0] flex flex-col justify-evenly'
           style={{ boxShadow: '0px 40px 30px 20px #5849B0' }}>
-          <Navbar theme='dark'/>
+          <Navbar theme='dark' />
           <img
             src="/background.png"
             alt=""
@@ -71,23 +75,36 @@ const LostAndFoundLayout = () => {
           </div>
         </div>
         <div
-          className='h-fit flex z-100 relative gap-2'>
+          className='h-dvh flex z-100 relative gap-2 overflow-hidden md:flex-row flex-col'>
           <div id="left"
-            className='min-h-full flex flex-col gap-1'>
+            className='md:min-h-full md:w-fit w-full flex gap-1 sticky top-0 flex-row md:flex-col justify-between'>
             <div
               onClick={() => { navigate(`/add/${page}`) }}
-              className='flex bg-black text-white font-poppins text-xs items-center rounded-r-full p-1 cursor-pointer'>
+              className='flex bg-black text-white font-poppins text-xs items-center rounded-r-full p-1 cursor-pointer min-w-56'>
               <span
                 className='flex flex-1 justify-center'>
                 Add {page.charAt(0).toUpperCase() + page.slice(1)} Item
               </span>
               <img src={addPng} alt="" className='w-10' />
             </div>
-            <div className='flex flex-1'>
+            <div
+              className='md:hidden bg-white flex items-center justify-center py-1 px-2 rounded-full mr-2 cursor-pointer'
+              onClick={(e) => {
+                let status = filterBar.current.dataset.isvisible
+                filterBar.current.style.left = status == 0 ? 0 : '-100%'
+                filterBar.current.dataset.isvisible = status == 0 ? 1 : 0
+                filterDisplayBtn.current.src = filterBar.current?.dataset?.isvisible == 0 ? FilterOnSvg : FilterOffSvg
+              }}>
+              <img ref={filterDisplayBtn} src={FilterOnSvg} alt="" className='w-8' />
+            </div>
+            <div
+              ref={filterBar}
+              data-isvisible={0} // 0-> hidden  || 1-> vissible
+              className='flex flex-1 md:relative md:left-0 absolute -left-full max-md:top-[calc(100%+0.25rem)] min-h-dvh max-md:h-1'>
               <Filters page={page} />
             </div>
           </div>
-          <div id="right" className='min-h-full overflow-x-auto grid-cols-4 grid gap-2 m-auto'>
+          <div id="right" className='h-full w-full overflow-x-auto gap-2 m-auto'>
             {items.map((item) => { return <ItemCard item={item} key={item.id} selectItem={setItemInfo} /> })}
             <ItemCard item={{ url: '/item.png', name: 'name', date: 'date', location: 'location', discription: 'discription' }} />
           </div>
