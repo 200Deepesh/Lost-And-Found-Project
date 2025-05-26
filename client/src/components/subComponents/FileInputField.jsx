@@ -2,7 +2,7 @@ import React from 'react'
 import { useRef, useState, useEffect } from 'react'
 import addCircleSvg from '/add-circle.svg'
 
-const FileInputField = ({inputFile, setInputFile}) => {
+const FileInputField = ({inputFile, setInputFile, id}) => {
 
     const inputField = useRef(null)
     const handleInputFieldClick = () => {
@@ -32,6 +32,7 @@ const FileInputField = ({inputFile, setInputFile}) => {
     return (
         <>
             <div
+                id={id? id: 'file-input'}
                 onClick={handleInputFieldClick}
                 onDragOver={handleDragOver}
                 onDrop={handleDrop}

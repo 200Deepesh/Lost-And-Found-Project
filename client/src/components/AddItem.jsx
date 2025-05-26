@@ -78,12 +78,25 @@ const AddItem = () => {
             <div className='text-sm flex items-center justify-center h-6 w-20 rounded-full text-white' style={{ backgroundColor: type == 'lost' ? '#E65D5D' : '#6AC25A' }}>{type.toUpperCase()}</div>
             <CloseBtn onClick={() => { navigate(-1) }} />
           </div>
-          <div className='flex gap-4'>
-            <div id='left' className='w-fit flex flex-col gap-2'>
-              <FileInputField inputFile={inputFile} setInputFile={setInputFile} />
-              <div className='flex gap-0.5 flex-col relative'>
+            <div id='form' className='w-full grid grid-cols-1 gap-y-2'>
+              <FileInputField id='img-file' inputFile={inputFile} setInputFile={setInputFile} />
+              <div id='item-info' className='flex flex-col gap-2'>
+                <div className='relative'>
+                  <input type="text" name='name' value={itemInfo?.name} onChange={(e) => { setItemInfo(e.target.name, e.target.value) }} placeholder='Item Name' className='w-56 border border-[#D9D9D9] rounded-full py-1 px-2 text-[12px]  focus-visible:outline-0 focus-visible:border-black placeholder:text-[12px] placeholder:text-[#00000066] ' />
+                  {errors?.itemInfo?.name && <div className='text-[10px] text-red-500 w-fit absolute right-1 top-1.5'>{errors?.itemInfo?.name.message}</div>}
+                </div>
+                <div className='relative'>
+                  <input type="text" name='location' value={itemInfo?.location} onChange={(e) => { setItemInfo(e.target.name, e.target.value) }} placeholder='Location' className='w-56 border border-[#D9D9D9] rounded-full py-1 px-2 text-[12px]  focus-visible:outline-0 focus-visible:border-black placeholder:text-[12px] placeholder:text-[#00000066] ' />
+                  {errors?.itemInfo?.location && <div className='text-[10px] text-red-500 w-fit absolute right-1 top-1.5'>{errors?.itemInfo?.location.message}</div>}
+                </div>
+                <div className='relative'>
+                  <input type="date" name='date' value={itemInfo?.date} onChange={(e) => { setItemInfo(e.target.name, e.target.value) }} placeholder='Location' className='w-56 border border-[#D9D9D9] rounded-full py-1 px-2 text-[12px]  focus-visible:outline-0 focus-visible:border-black placeholder:text-[12px] placeholder:text-[#00000066] ' />
+                  {errors?.itemInfo?.date && <div className='text-[10px] text-red-500 w-fit absolute right-1 top-1.5'>{errors?.itemInfo?.date.message}</div>}
+                </div>
+              </div>
+              <div id='contact-details' className='flex gap-0.5 flex-col relative w-64'>
                 <h2 className='text-sm font-medium'>Contact Detials</h2>
-                <div className='w-full border-2 border-[#D9D9D9] box-border rounded-xl p-2 flex flex-col gap-2'>
+                <div className='w-full border-2 border-[#D9D9D9] box-border rounded-xl p-2 flex flex-col gap-1'>
                   <div className='relative'>
                     <input type="text" name='name' value={studentInfo?.name} onChange={(e) => { setStudentInfo(e.target.name, e.target.value) }} placeholder='Name' className=' w-full max-w-40 border border-[#D9D9D9] rounded-full py-1 px-2 text-[12px]  focus-visible:outline-0 focus-visible:border-black placeholder:text-[12px] placeholder:text-[#00000066] ' />
                     {errors?.studentInfo?.name && <div className='text-[10px] text-red-500 w-fit absolute right-1 top-1.5'>{errors?.studentInfo?.name.message}</div>}
@@ -128,34 +141,18 @@ const AddItem = () => {
                   </div>
                 </div>
               </div>
-            </div>
-            <div id='right' className='flex flex-col gap-2'>
-              <div className='flex flex-col gap-2'>
-                <div className='relative'>
-                  <input type="text" name='name' value={itemInfo?.name} onChange={(e) => { setItemInfo(e.target.name, e.target.value) }} placeholder='Item Name' className='w-56 border border-[#D9D9D9] rounded-full py-1 px-2 text-[12px]  focus-visible:outline-0 focus-visible:border-black placeholder:text-[12px] placeholder:text-[#00000066] ' />
-                  {errors?.itemInfo?.name && <div className='text-[10px] text-red-500 w-fit absolute right-1 top-1.5'>{errors?.itemInfo?.name.message}</div>}
-                </div>
-                <div className='relative'>
-                  <input type="text" name='location' value={itemInfo?.location} onChange={(e) => { setItemInfo(e.target.name, e.target.value) }} placeholder='Location' className='w-56 border border-[#D9D9D9] rounded-full py-1 px-2 text-[12px]  focus-visible:outline-0 focus-visible:border-black placeholder:text-[12px] placeholder:text-[#00000066] ' />
-                  {errors?.itemInfo?.location && <div className='text-[10px] text-red-500 w-fit absolute right-1 top-1.5'>{errors?.itemInfo?.location.message}</div>}
-                </div>
-                <div className='relative'>
-                  <input type="date" name='date' value={itemInfo?.date} onChange={(e) => { setItemInfo(e.target.name, e.target.value) }} placeholder='Location' className='w-56 border border-[#D9D9D9] rounded-full py-1 px-2 text-[12px]  focus-visible:outline-0 focus-visible:border-black placeholder:text-[12px] placeholder:text-[#00000066] ' />
-                  {errors?.itemInfo?.date && <div className='text-[10px] text-red-500 w-fit absolute right-1 top-1.5'>{errors?.itemInfo?.date.message}</div>}
-                </div>
-              </div>
-              <div className='flex gap-0.5 flex-col relative'>
+
+              <div id='discription' className='flex gap-0.5 flex-col relative'>
                 <label htmlFor="discription" className='text-sm font-medium'>Discription</label>
-                <textarea name="discription" id="" value={itemInfo?.discription} onChange={(e) => { setItemInfo(e.target.name, e.target.value) }} placeholder='Discription the item...' className='w-84 h-48 border-2 box-border border-[#D9D9D9] rounded-xl p-2 text-xs resize-none focus-visible:outline-0 focus-visible:border-black placeholder:text-[12px] placeholder:text-[#00000066] overflow-auto'></textarea>
+                <textarea name="discription" id="" value={itemInfo?.discription} onChange={(e) => { setItemInfo(e.target.name, e.target.value) }} placeholder='Discription the item...' className='w-64 h-48 border-2 box-border border-[#D9D9D9] rounded-xl p-2 text-xs resize-none focus-visible:outline-0 focus-visible:border-black placeholder:text-[12px] placeholder:text-[#00000066] overflow-auto'></textarea>
                 {errors?.itemInfo?.discription && <div className='text-[10px] text-red-500 w-fit absolute right-1 top-1.5'>{errors?.itemInfo?.discription.message}</div>}
               </div>
-              <div className='border-2 box-border border-[#D9D9D9] p-2 w-84 rounded-xl gap-1 flex flex-col'>
+              <div id='tags' className='border-2 box-border border-[#D9D9D9] p-1 rounded-xl w-64 max-w-96 gap-1 flex flex-col max-h-24 overflow-y-scroll'>
                 <div className='text-[#00000066] text-sm relative'>Tags for Quick Search</div>
                 <div className='w-full flex gap-1 flex-wrap'>
                   {preDefineTags.map((tag) => <QuickSearchTags key={tag} tagName={tag} tags={itemInfo?.quickSearchTags} setTag={(newTags) => { setItemInfo('quickSearchTags', newTags) }} />)}
                 </div>
               </div>
-            </div>
           </div>
           <div className='flex items-center justify-center gap-4'>
             <button className='bg-[#050506CF] rounded-full px-4 py-1 text-white text-xs font-poppins'>Save</button>
@@ -169,4 +166,4 @@ const AddItem = () => {
 
 export default AddItem
 
-const preDefineTags = ['Wallet', 'Phone', 'Watch', 'Bottle', 'Admin Block', 'Keys', 'Canteen', 'Today', 'EarBuds']
+const preDefineTags = ['Wallet', 'Phone', 'Watch', 'Bottle', 'Admin Block', 'Keys', 'Canteen', 'Today', 'EarBuds', 'Books', 'ID Card']
