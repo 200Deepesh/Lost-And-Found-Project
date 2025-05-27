@@ -14,14 +14,11 @@ import Profile from './components/Profile'
 import './App.css'
 
 function App() {
-
+  const user = getCookies('user')
+  const id = user? JSON.parse(user).emailId : null
   const setUserId = useUserStore((state) => state.setUserId)
-  const userId = useUserStore((state) => state.userId)
   useEffect(() => {
-    const user = getCookies('user')
-    const id = user? JSON.parse(user).emailId : null
     if (id) setUserId(id)
-    console.log(userId)
   })
 
 
@@ -33,7 +30,7 @@ function App() {
             <Route index element={<Home />} />
             <Route
               path='/:page'
-              element={(!userId)
+              element={(!id)
                 ? <Navigate to='../signin' replace={true}/>
                 : <LostAndFoundLayout />
               } />

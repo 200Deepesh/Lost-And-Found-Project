@@ -3,7 +3,7 @@ import Cookies from 'js-cookie'
 const setCookies = (obj)=>{
     for (const key in obj) {
         // document.cookie = key + "=" + obj[key] + "; path=/";
-        Cookies.set(key, obj[key])
+        Cookies.set(key, obj[key], { expires: 30 })
     }
 }
 

@@ -53,7 +53,7 @@ const LostAndFoundLayout = () => {
       <div
         className='h-full w-full overflow-x-auto scrollbar'>
         <div
-          className='h-96 w-full pt-12 relative bg-[#5849B0] flex flex-col justify-evenly'
+          className='sm:h-96 h-72 w-full pt-12 relative bg-[#5849B0] flex flex-col justify-evenly'
           style={{ boxShadow: '0px 40px 30px 20px #5849B0' }}>
           <Navbar theme='dark' />
           <img
@@ -61,26 +61,26 @@ const LostAndFoundLayout = () => {
             alt=""
             className='h-[calc(100%+40px)] w-full blur-md absolute opacity-40 top-0 left-0' />
           <h1
-            className='w-fit self-center font-kalam text-5xl font-black text-black relative z-10'>
-            {page == 'lost' ? 'कुछ खो दिए क्या?' : 'कुछ मिला है क्या ?'}
+            className='w-fit self-center font-kalam sm:text-5xl text-4xl font-black text-black relative z-10'>
+            {page == 'lost' ? 'कुछ खो दिए क्या ?' : 'कुछ मिला है क्या ?'}
           </h1>
           <h2
-            className='w-fit self-center left-40 font-kalam text-xl font-bold text-white relative z-10'>
-            {page == 'lost' ? 'आओ साथ में ढूंढे!!' : 'आओ इसके मालिक को ढूंढे !!'}
+            className='w-fit self-center sm:left-40 left-20 font-kalam text-xl font-bold text-white relative z-10'>
+            {page == 'lost' ? 'आओ साथ में ढूंढे !!' : 'आओ इसके मालिक को ढूंढे !!'}
           </h2>
           <div
-            className='flex relative z-10 items-center gap-4 w-full max-w-[48rem] self-center right-20'>
-            <div className='w-96'><Searchbar /></div>
-            <img src={arrowPng} alt="" className='h-40 w-64' />
+            className='flex relative z-10 items-center gap-4 w-full max-w-[48rem] self-center lg:right-20 pl-4'>
+            <div className='lg:w-96 w-80'><Searchbar /></div>
+            <img src={arrowPng} alt="" className='h-40 lg:w-64 w-52 hidden sm:inline' />
           </div>
         </div>
         <div
           className='h-dvh flex z-100 relative gap-2 overflow-hidden md:flex-row flex-col'>
           <div id="left"
-            className='md:min-h-full md:w-fit w-full flex gap-1 sticky top-0 flex-row md:flex-col justify-between'>
+            className='md:min-h-full md:w-fit w-full flex gap-1 sticky top-0 flex-row md:flex-col justify-between items-center'>
             <div
               onClick={() => { navigate(`/add/${page}`) }}
-              className='flex bg-black text-white font-poppins text-xs items-center rounded-r-full p-1 cursor-pointer min-w-56'>
+              className='flex bg-black text-white font-poppins text-xs items-center rounded-r-full p-1 cursor-pointer md:min-w-56 min-w-48'>
               <span
                 className='flex flex-1 justify-center'>
                 Add {page.charAt(0).toUpperCase() + page.slice(1)} Item
@@ -88,14 +88,14 @@ const LostAndFoundLayout = () => {
               <img src={addPng} alt="" className='w-10' />
             </div>
             <div
-              className='md:hidden bg-white flex items-center justify-center py-1 px-2 rounded-full mr-2 cursor-pointer'
+              className='md:hidden bg-white flex items-center justify-center py-1 px-1 rounded-full mr-2 cursor-pointer h-fit'
               onClick={(e) => {
                 let status = filterBar.current.dataset.isvisible
                 filterBar.current.style.left = status == 0 ? 0 : '-100%'
                 filterBar.current.dataset.isvisible = status == 0 ? 1 : 0
                 filterDisplayBtn.current.src = filterBar.current?.dataset?.isvisible == 0 ? FilterOnSvg : FilterOffSvg
               }}>
-              <img ref={filterDisplayBtn} src={FilterOnSvg} alt="" className='w-8' />
+              <img ref={filterDisplayBtn} src={FilterOnSvg} alt="" className='w-6' />
             </div>
             <div
               ref={filterBar}
