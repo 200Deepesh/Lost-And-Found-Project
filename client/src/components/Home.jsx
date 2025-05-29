@@ -106,15 +106,15 @@ export default Home
 
 const hardCodedRecentItems = {
   lost: [
-    { name: 'phone', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url: '/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
-    { name: 'wallet', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url: '/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
-    { name: 'assinment', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url: '/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
-    { name: 'bag', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url: '/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
+    { name: 'phone', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url: '/item.png', studentInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
+    { name: 'wallet', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url: '/item.png', studentInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
+    { name: 'assinment', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url: '/item.png', studentInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
+    { name: 'bag', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url: '/item.png', studentInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
   ],
   found: [
-    { name: 'wallet', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url: '/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
-    { name: 'assinment', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url: '/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
-    { name: 'bag', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url: '/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
-    { name: 'pen', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url: '/item.png', contactInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
+    { name: 'wallet', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url: '/item.png', studentInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
+    { name: 'assinment', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url: '/item.png', studentInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
+    { name: 'bag', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url: '/item.png', studentInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
+    { name: 'pen', date: '12/4/2025', location: 'Canteen', discription: 'discription', type: 'lost', url: '/item.png', studentInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
   ]
 }

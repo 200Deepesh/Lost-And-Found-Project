@@ -2,7 +2,7 @@ import React from 'react'
 import { useRef, useState, useEffect } from 'react'
 import addCircleSvg from '/add-circle.svg'
 
-const FileInputField = ({inputFile, setInputFile, id}) => {
+const FileInputField = ({inputFile, setInputFile, id, url}) => {
 
     const inputField = useRef(null)
     const handleInputFieldClick = () => {
@@ -39,8 +39,8 @@ const FileInputField = ({inputFile, setInputFile, id}) => {
                 className='w-64 h-48 rounded-2xl overflow-hidden bg-[#e3e3e3] cursor-pointer'
             >
                 {
-                    inputFile
-                        ? <img src={URL.createObjectURL(inputFile)} alt='Input File' className='w-full h-full'/>
+                    inputFile || url
+                        ? <img src={inputFile? URL.createObjectURL(inputFile): url} alt='Input File' className='w-full h-full'/>
                         : (<div className='w-full h-full flex flex-col items-center justify-center gap-2'>
                             <img src={addCircleSvg} alt="" className='w-12'/>
                             <span className='text-2xl font-bold font-mrounded text-[#b2b2b2]'>Add Image</span>

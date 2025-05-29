@@ -121,7 +121,7 @@ const initialAddItemState = {
         name: '',
         location: '',
         date: '',
-        quickSearchTags: [],
+        tags: [],
         discription: '',
     },
     errors: {}
@@ -142,6 +142,9 @@ export const useAddItemStore = create((set) => ({
     },
     resetAll: () => {
         set(() => ({ ...initialAddItemState }))
+    },
+    setAll: (info) => {
+        set(() => ({ ...info }))
     }
 }))
 

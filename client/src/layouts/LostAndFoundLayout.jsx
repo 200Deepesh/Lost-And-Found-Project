@@ -34,7 +34,7 @@ const LostAndFoundLayout = () => {
     (async () => {
       const itemList = await getItems(page)
       setItems(itemList)
-      console.log(items)
+      console.log(items[0]?.itemInfo)
     }
     )()
 

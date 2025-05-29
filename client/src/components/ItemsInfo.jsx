@@ -5,8 +5,10 @@ import mailPng from '/mail.png'
 import locationPng from '/location_on.png'
 import todayPng from '/today.png'
 import CloseBtn from './subComponents/CloseBtn'
+import { useNavigate } from 'react-router'
 
 const ItemsInfo = ({ itemInfo, deselectItem }) => {
+    const navigate = useNavigate()
 
     return (
         <>
@@ -16,41 +18,53 @@ const ItemsInfo = ({ itemInfo, deselectItem }) => {
                         <div className='px-4 py-2 rounded-br-lg text-white w-fit' style={{ backgroundColor: (itemInfo.type == 'lost') ? '#E65D5D' : '#6ac25a' }}>{itemInfo.type.toUpperCase()}</div>
                         <CloseBtn onClick={deselectItem} />
                     </div>
-                    <div className='flex font-mrounded gap-4 p-2'>
-                        <div id="left" className='md:grid md:grid-cols-2 flex flex-col gap-4'>
+                    <div className='flex font-mrounded gap-4 p-2 flex-col items-center'>
+                        <div className='md:grid md:grid-cols-2 flex flex-col gap-4'>
                             <div className='w-80 h-60'>
                                 <img src={itemInfo.url} alt="" className='w-80 h-60 object-cover rounded-3xl' />
                             </div>
                             <div id='item-info-' className='flex flex-col gap-4'>
-                                <h1 className='font-bold text-2xl'>{itemInfo.name}</h1>
+                                <h1 className='font-bold text-2xl'>{itemInfo.itemInfo.name}</h1>
                                 <div className='flex items-center gap-2'>
                                     <img src={locationPng} alt="" className='h-6' />
-                                    <span>{itemInfo.location}</span>
+                                    <span>{itemInfo.itemInfo.location}</span>
                                 </div>
                                 <div className='flex items-center gap-2'>
                                     <img src={todayPng} alt="" className='h-6' />
-                                    <span>{itemInfo.date}</span>
+                                    <span>{itemInfo.itemInfo.date}</span>
                                 </div>
                             </div>
-                            <div id="contact-detail-" className='border-2 border-[#D9D9D9] rounded-2xl p-2 flex flex-col gap-1'>
-                                <h2 className='font-semibold text-lg'>{itemInfo.contactInfo.name}</h2>
-                                <div className='text-sm'>{itemInfo.contactInfo.branch} | {itemInfo.contactInfo.sem}</div>
+                            <div id="contact-detail-" className='border-2 border-[#D9D9D9] rounded-2xl p-2 flex flex-col gap-1 h-fit'>
+                                <h2 className='font-semibold text-lg'>{itemInfo.studentInfo.name}</h2>
+                                <div className='text-sm'>{itemInfo.studentInfo.branch} | {itemInfo.studentInfo.sem}</div>
                                 <div className='flex items-center gap-2'>
                                     <img src={phonePng} alt="" className='h-5' />
-                                    <span className='text-sm'>{itemInfo.contactInfo.phoneNo}</span>
+                                    <span className='text-sm'>{itemInfo.studentInfo.phoneNo}</span>
                                 </div>
                                 <div className='flex items-center gap-2'>
                                     <img src={mailPng} alt="" className='h-5' />
-                                    <span className='text-sm'>{itemInfo.contactInfo.emailId}</span>
+                                    <span className='text-sm'>{itemInfo.studentInfo.emailId}</span>
                                 </div>
                             </div>
-                        {/* </div>
-                        <div id='right' className='flex flex-col gap-4'> */}
-                            
-                            <div className='border-2 border-[#D9D9D9] rounded-2xl w-80 min-h-36 p-1 gap-2 flex flex-col flex-1 col-start-2'>
+
+                            <div className='border-2 border-[#D9D9D9] rounded-2xl w-80 min-h-28 p-1 gap-2 flex flex-col flex-1 col-start-2'>
                                 <h3 className='font-semibold text-lg'>Discription</h3>
-                                <div className='text-sm'>{itemInfo.discription}</div>
+                                <div className='text-sm'>{itemInfo.itemInfo.discription}</div>
                             </div>
+                        </div>
+                        <div className='flex gap-2'>
+
+                            <button
+                                className='bg-[#050506CF] rounded-full px-4 py-1 text-white text-xs font-poppins w-16 cursor-pointer'
+                                onClick={deselectItem}>
+                                Close
+                            </button>
+
+                            <button
+                                className='bg-[#050506CF] rounded-full px-4 py-1 text-white text-xs font-poppins w-16 cursor-pointer'
+                                onClick={() => { navigate(`/add/${itemInfo.type}?id=${itemInfo.id}&edit=${true}`); }}>
+                                Edit
+                            </button>
                         </div>
                     </div>
                 </div>
