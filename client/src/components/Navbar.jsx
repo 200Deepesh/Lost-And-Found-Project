@@ -3,7 +3,7 @@ import { NavLink } from 'react-router'
 import logo from '/logo.png'
 import { useState } from 'react'
 import { useUserStore } from '../store'
-import Dropdown from './subComponents/Dropdown'
+import ProfileLogo from './subComponents/ProfileLogo'
 
 const Navbar = ({ theme }) => {
 
@@ -41,7 +41,7 @@ const Navbar = ({ theme }) => {
                 <NavLink to='/signin'><button className='bg-[#594AB1] rounded-full text-xs min-[28rem]:px-4 px-3 py-1 text-white font-light cursor-pointer'>Login</button></NavLink>
                 <NavLink to='/signup'><button className='bg-[#5A7DC2] rounded-full text-xs min-[28rem]:px-4 px-3 py-1 text-white font-light cursor-pointer'>Signup</button></NavLink>
               </>)
-              : (<> <Dropdown /></>)}
+              : (<> <ProfileLogo /></>)}
           </div>
         </div>
       </nav>

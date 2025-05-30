@@ -48,3 +48,17 @@ export const getItemsUsingFilters = async (filters, page) => {
     const { items } = await res.json()
     return items
 }
+
+
+export const updateItemByID = async (id, itemInfo) => {
+    const url = `http://127.0.0.1:8000/item/${id}`
+    const res = await fetch(url, {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(itemInfo)
+    })
+    const status = await res.json()
+    return status
+}

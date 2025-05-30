@@ -20,6 +20,7 @@ import FilterOffSvg from '/filterOff.svg'
 const LostAndFoundLayout = () => {
   const navigate = useNavigate()
   const filterBar = useRef(null)
+  const itemCardsContainor = useRef(null)
   const filterDisplayBtn = useRef(null)
   const [itemInfo, setItemInfo] = useState()
   const location = useLocation()
@@ -36,12 +37,41 @@ const LostAndFoundLayout = () => {
       setItems(itemList)
       console.log(items[0]?.itemInfo)
     }
-    )()
+    )();
+
+    window.addEventListener(
+      "load",
+      (event) => {
+        createObserver();
+      },
+      false,
+    );
+
 
   }, [location])
 
   const { page } = useParams();
 
+  const createObserver = () => {
+    const options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: "1",
+    }
+    const handleIntersection = (entries, observer) => {
+      entries.forEach((entry) => {
+        if(entry.isIntersecting){
+          entry.target.style.overflowY = 'auto'
+        }
+        else{
+          entry.target.style.overflowY = 'hidden'
+        }
+      });
+    }
+    const observer = new IntersectionObserver(handleIntersection, options)
+    observer.observe(itemCardsContainor.current)
+
+  }
 
 
   if (page != 'lost' && page != 'found') {
@@ -104,7 +134,7 @@ const LostAndFoundLayout = () => {
               <Filters page={page} />
             </div>
           </div>
-          <div id="right" className='h-full w-full overflow-x-auto gap-2 m-auto'>
+          <div id="right" ref={itemCardsContainor} className='h-full w-full overflow-y-hidden gap-2 m-auto'>
             {items.map((item) => { return <ItemCard item={item} key={item.id} selectItem={setItemInfo} /> })}
             <ItemCard item={{ url: '/item.png', name: 'name', date: 'date', location: 'location', discription: 'discription' }} />
           </div>

@@ -7,9 +7,10 @@ import Navbar from './Navbar'
 import QuickSearchTags from './subComponents/QuickSearchTags'
 import { useNavigate } from 'react-router'
 import CloseBtn from './subComponents/CloseBtn'
-import { addItem, getItemByID } from '../api/items'
+import { addItem, getItemByID, updateItemByID } from '../api/items'
 import { useAddItemStore } from '../store'
 import { useShallow } from 'zustand/react/shallow'
+import DropdownInputField from './subComponents/DropdownInputField'
 
 
 const AddItem = () => {
@@ -58,7 +59,9 @@ const AddItem = () => {
   }, [])
 
 
-  const handleSubmit = async (formData) => {
+  const handleSubmit = async () => {
+    console.log('form is submited')
+    console.log(item?.id)
     const data = {
       studentInfo: studentInfo,
       itemInfo: itemInfo,
@@ -80,10 +83,19 @@ const AddItem = () => {
     }
 
     //POST REQUEST IN SERVER WITH DATA
-    const res = await addItem({ itemInfo, studentInfo })
-    if (res.errors) {
-      setErrors(res.errors)
-      return
+    if (item?.id) {
+      const res = await updateItemByID(item.id, { itemInfo, studentInfo })
+      if (res.errors) {
+        setErrors(res.errors)
+        return
+      }
+    }
+    else {
+      const res = await addItem({ itemInfo, studentInfo })
+      if (res.errors) {
+        setErrors(res.errors)
+        return
+      }
     }
 
     resetAll()
@@ -130,31 +142,20 @@ const AddItem = () => {
                 </div>
 
                 <div className='relative'>
-                  <select name='branch' onChange={(e) => { setStudentInfo(e.target.name, e.target.value); console.log(studentInfo) }} className='w-full max-w-40 border border-[#D9D9D9] rounded-full py-1 px-2 text-[12px]  focus-visible:outline-0 focus-visible:border-black' style={{ color: studentInfo?.branch ? 'black' : '#00000066' }}>
-                    <option value="" className=''>Branch</option>
-                    <option value='AIDS'>AIDS</option>
-                    <option value='CE'>CE</option>
-                    <option value='CS'>CS</option>
-                    <option value='EE'>EE</option>
-                    <option value='MT'>MT</option>
-                    <option value='IP'>IP</option>
-                    <option value='IT'>IT</option>
-                  </select>
-                  {errors?.studentInfo?.branch && <div className='text-[10px] text-red-500 w-fit absolute right-1 top-1.5'>{errors?.studentInfo?.branch.message}</div>}
+                <DropdownInputField
+                  placeholder={'Branch'}
+                  value={studentInfo?.branch} 
+                  setValue={(value)=>{setStudentInfo( 'branch', value)}}
+                  options={["AIDS", "CE", "CS", "EE", "MT", "IP", "IT"]}/>
+                  {errors?.studentInfo?.sem && <div className='text-[10px] text-red-500 w-fit absolute right-1 top-1.5'>{errors?.studentInfo?.sem.message}</div>}
                 </div>
 
                 <div className='relative'>
-                  <select name='sem' onChange={(e) => { setStudentInfo(e.target.name, e.target.value); console.log(studentInfo) }} className='w-full max-w-40 border border-[#D9D9D9] rounded-full py-1 px-2 text-[12px]  focus-visible:outline-0 focus-visible:border-black' style={{ color: studentInfo?.sem ? 'black' : '#00000066' }}>
-                    <option value="" className=''>Semester</option>
-                    <option value='1'>1</option>
-                    <option value='2'>2</option>
-                    <option value='3'>3</option>
-                    <option value='4'>4</option>
-                    <option value='5'>5</option>
-                    <option value='6'>6</option>
-                    <option value='7'>7</option>
-                    <option value='8'>8</option>
-                  </select>
+                <DropdownInputField
+                  placeholder={'Semester'}
+                  value={studentInfo?.sem} 
+                  setValue={(value)=>{setStudentInfo( 'sem', value)}}
+                  options={["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th"]}/>
                   {errors?.studentInfo?.sem && <div className='text-[10px] text-red-500 w-fit absolute right-1 top-1.5'>{errors?.studentInfo?.sem.message}</div>}
                 </div>
 
@@ -180,18 +181,27 @@ const AddItem = () => {
             </div>
           </div>
           <div className='flex items-center justify-center gap-4'>
-            <button
-              className='bg-[#050506CF] rounded-full px-4 py-1 text-white text-xs font-poppins cursor-pointer'>
-              Save
-            </button>
-            <button
+            {item
+              ? (<button
+                className='bg-[#050506CF] rounded-full px-4 py-1 text-white text-xs font-poppins cursor-pointer'
+                type='submit'>
+                Update
+              </button>)
+              : (<button
+                className='bg-[#050506CF] rounded-full px-4 py-1 text-white text-xs font-poppins cursor-pointer'
+                type='submit'>
+                Save
+              </button>)
+            }
+            < button
+              type='button'
               className='bg-[#050506CF] rounded-full px-4 py-1 text-white text-xs font-poppins cursor-pointer'
-              onClick={() => { navigate(-1) }}>
+              onClick={() => { navigate(-1); return 0 }}>
               Cancle
             </button>
           </div>
         </form >
-      </div>
+      </div >
     </>
   )
 }

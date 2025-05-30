@@ -31,7 +31,7 @@ const Profile = () => {
                     })}
                 </div>
 
-                {itemInfo && <ItemsInfo itemInfo={itemInfo} deselectItem={() => { setItemInfo(null) }} />}
+                {itemInfo && <ItemsInfo itemInfo={itemInfo} deselectItem={() => { setItemInfo(null) }} isTrusted={true}/>}
             </div>
         </>
     )

@@ -1,14 +1,13 @@
 import React from 'react'
 import { useState, useRef } from 'react'
 import { Link } from 'react-router'
-import downArrow from '/downArrow.svg'
 import { removeCookies } from '../../api/cookies'
 import { getCookies } from '../../api/cookies'
 import { useUserStore } from '../../store'
 import accountSvg from '/account.svg'
 
 
-const Dropdown = () => {
+const ProfileLogo = () => {
     const user = JSON.parse(getCookies('user'))
     const [display, setDisplay] = useState(false);
     const timeoutRef = useRef(null);
@@ -51,4 +50,4 @@ const Dropdown = () => {
     )
 }
 
-export default Dropdown
+export default ProfileLogo

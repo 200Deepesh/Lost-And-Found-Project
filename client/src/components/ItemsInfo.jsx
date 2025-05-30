@@ -7,7 +7,7 @@ import todayPng from '/today.png'
 import CloseBtn from './subComponents/CloseBtn'
 import { useNavigate } from 'react-router'
 
-const ItemsInfo = ({ itemInfo, deselectItem }) => {
+const ItemsInfo = ({ itemInfo, deselectItem, isTrusted }) => {
     const navigate = useNavigate()
 
     return (
@@ -60,11 +60,11 @@ const ItemsInfo = ({ itemInfo, deselectItem }) => {
                                 Close
                             </button>
 
-                            <button
+                            {isTrusted && <button
                                 className='bg-[#050506CF] rounded-full px-4 py-1 text-white text-xs font-poppins w-16 cursor-pointer'
                                 onClick={() => { navigate(`/add/${itemInfo.type}?id=${itemInfo.id}&edit=${true}`); }}>
                                 Edit
-                            </button>
+                            </button>}
                         </div>
                     </div>
                 </div>

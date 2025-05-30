@@ -28,7 +28,7 @@ const UserItem = ({ name, url, type, selectItem, id }) => {
                     className='size-10 rounded-lg' />
                 <span
                     className='w-16 overflow-hidden whitespace-nowrap text-ellipsis'>
-                    {name[0].toUpperCase() + name.slice(1)}
+                    {name && <>{name[0].toUpperCase() + name.slice(1)}</>}
                 </span>
                 <div
                     className='text-xs flex items-center justify-center h-5 w-18 rounded-full text-white'
