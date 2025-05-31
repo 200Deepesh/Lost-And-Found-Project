@@ -41,7 +41,7 @@ function App() {
             <Route path='/signin' element={<Signin />} />
           </Route>
           <Route path='/item/:id' element={<ItemsInfo />} />
-          <Route path='/add/:type' element={<AddItem />} />
+          <Route path='/add/:initialStatus' element={<AddItem />} />
           <Route path='/user/:id' element={<Profile />} />
         </Routes>
       </BrowserRouter>

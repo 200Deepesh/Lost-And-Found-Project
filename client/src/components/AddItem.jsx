@@ -14,7 +14,7 @@ import DropdownInputField from './subComponents/DropdownInputField'
 
 
 const AddItem = () => {
-  const { type } = useParams()
+  const { initialStatus } = useParams()
   const navigate = useNavigate()
 
   const [item, setItem] = useState(null);
@@ -103,7 +103,7 @@ const AddItem = () => {
     console.log(data)
   }
 
-  if (type != 'lost' && type != 'found') {
+  if (initialStatus != 'lost' && initialStatus != 'found') {
     return <Notfound />
   }
 
@@ -114,7 +114,7 @@ const AddItem = () => {
         <Navbar theme='dark' />
         <form action={handleSubmit} className='w-fit h-fit rounded-xl bg-white p-2 flex flex-col gap-2'>
           <div className='flex justify-between'>
-            <div className='text-sm flex items-center justify-center h-6 w-20 rounded-full text-white' style={{ backgroundColor: type == 'lost' ? '#E65D5D' : '#6AC25A' }}>{type.toUpperCase()}</div>
+            <div className='text-sm flex items-center justify-center h-6 w-20 rounded-full text-white' style={{ backgroundColor: initialStatus == 'lost' ? '#E65D5D' : '#6AC25A' }}>{initialStatus.toUpperCase()}</div>
             <CloseBtn onClick={() => { navigate(-1) }} />
           </div>
           <div id='form' className='w-full grid grid-cols-1 gap-y-2'>

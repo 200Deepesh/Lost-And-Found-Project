@@ -23,11 +23,11 @@ const Profile = () => {
     return (
         <>
             <div
-                className='h-full w-full overflow-x-auto scrollbar pt-12'>
+                className='h-full w-full overflow-x-auto scrollbar pt-12 flex'>
                     <Navbar theme='light'/>
-                <div className='flex flex-col gap-1'>
+                <div className='flex flex-col gap-1 items-center flex-1 overflow-y-auto'>
                     {userItems && userItems.map((item) => {
-                        return <UserItem key={item.id} name={item.name} url={item.url} id={item.id} type={item.type} selectItem={ setItemInfo }/>
+                        return <UserItem key={item.id} name={item.name} url={item.url} id={item.id} initialStatus={item.initialStatus} selectItem={ setItemInfo }/>
                     })}
                 </div>
 
