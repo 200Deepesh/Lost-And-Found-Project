@@ -20,7 +20,7 @@ const UserItem = ({ name, url, initialStatus, selectItem, id }) => {
     return (
         <>
             <div
-                className='flex items-center gap-1 w-xl bg-gray-100 rounded-xl px-2 py-1 justify-between cursor-pointer'
+                className='flex items-center gap-1 w-xl max-w-full bg-gray-100 rounded-xl px-2 py-1 justify-between cursor-pointer'
                 onClick={handleClick}>
                 <img
                     src={url}

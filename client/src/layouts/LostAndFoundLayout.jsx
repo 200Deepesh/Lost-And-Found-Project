@@ -35,7 +35,6 @@ const LostAndFoundLayout = () => {
     (async () => {
       const itemList = await getItems(page)
       setItems(itemList)
-      console.log(items[0]?.itemInfo)
     }
     )();
 
@@ -60,17 +59,23 @@ const LostAndFoundLayout = () => {
     }
     const handleIntersection = (entries, observer) => {
       entries.forEach((entry) => {
-        if(entry.isIntersecting){
+        if (entry.isIntersecting) {
           entry.target.style.overflowY = 'auto'
         }
-        else{
+        else {
           entry.target.style.overflowY = 'hidden'
         }
       });
     }
     const observer = new IntersectionObserver(handleIntersection, options)
     observer.observe(itemCardsContainor.current)
+  }
 
+  const tougleFilter = (filterBar, filterDisplayBtn) => {
+    let status = filterBar.current.dataset.isvisible
+    filterBar.current.style.left = status == 0 ? 0 : '-100%'
+    filterBar.current.dataset.isvisible = status == 0 ? 1 : 0
+    filterDisplayBtn.current.src = filterBar.current?.dataset?.isvisible == 0 ? FilterOnSvg : FilterOffSvg
   }
 
 
@@ -119,12 +124,7 @@ const LostAndFoundLayout = () => {
             </div>
             <div
               className='md:hidden bg-white flex items-center justify-center py-1 px-1 rounded-full mr-2 cursor-pointer h-fit'
-              onClick={(e) => {
-                let status = filterBar.current.dataset.isvisible
-                filterBar.current.style.left = status == 0 ? 0 : '-100%'
-                filterBar.current.dataset.isvisible = status == 0 ? 1 : 0
-                filterDisplayBtn.current.src = filterBar.current?.dataset?.isvisible == 0 ? FilterOnSvg : FilterOffSvg
-              }}>
+              onClick={(e) => { tougleFilter(filterBar, filterDisplayBtn) }}>
               <img ref={filterDisplayBtn} src={FilterOnSvg} alt="" className='w-6' />
             </div>
             <div
@@ -134,9 +134,11 @@ const LostAndFoundLayout = () => {
               <Filters page={page} />
             </div>
           </div>
-          <div id="right" ref={itemCardsContainor} className='h-full w-full overflow-y-hidden gap-2 m-auto'>
-            {items.map((item) => { return <ItemCard item={item} key={item.id} selectItem={setItemInfo} /> })}
-            <ItemCard item={{ url: '/item.png', name: 'name', date: 'date', location: 'location', discription: 'discription' }} />
+          <div id="right" ref={itemCardsContainor} className='h-full w-full overflow-y-hidden'>
+            <div className='h-fit w-full columns-[13.5rem]'>
+              {items.map((item) => { return <ItemCard item={item} key={item._id} selectItem={setItemInfo} /> })}
+              {/* <ItemCard item={{ url: '/item.png', name: 'name', date: 'date', location: 'location', discription: 'discription' }} /> */}
+            </div>
           </div>
         </div>
         {itemInfo && <ItemsInfo itemInfo={itemInfo} deselectItem={() => { setItemInfo(null) }} />}

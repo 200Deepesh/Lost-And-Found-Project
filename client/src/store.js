@@ -37,7 +37,7 @@ export const useSearchStore = create((set) => ({
 const initialSignupStates = {
     emailId: '',
     password: '',
-    name: '',
+    userName: '',
     checkbox: false,
     errors: {},
 }
@@ -51,8 +51,8 @@ export const useSignupStore = create((set) => ({
     setPassword: (input) => {
         set(() => ({ password: input }))
     },
-    setName: (input) => {
-        set(() => ({ name: input }))
+    setUserName: (input) => {
+        set(() => ({ userName: input }))
     },
     setErrors: (input) => {
         set(() => ({ errors: input }))

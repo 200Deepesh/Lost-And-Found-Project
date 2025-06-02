@@ -14,8 +14,7 @@ import Profile from './components/Profile'
 import './App.css'
 
 function App() {
-  const user = getCookies('user')
-  const id = user? JSON.parse(user).emailId : null
+  const id = getCookies('_id')
   const setUserId = useUserStore((state) => state.setUserId)
   useEffect(() => {
     if (id) setUserId(id)

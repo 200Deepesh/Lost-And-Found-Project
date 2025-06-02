@@ -56,8 +56,20 @@ const Filters = ({ page }) => {
                 })}
 
                 <div className='flex justify-evenly'>
-                    {((items.length || date.length || location.length)) ? <button onClick={(e) => { updateFilters({ type: 'clear' }); clearFilters(page) }} className='flex items-center justify-center w-16 h-6 bg-white rounded-full text-xs font-medium'>clear</button> : null}
-                    {(!isFilterApplied) ? <button onClick={(e) => { applyFilters({ items: items, date: date, location: location }, page) }} className='flex items-center justify-center w-16 h-6 bg-white rounded-full text-xs font-medium'>apply</button> : null}
+                    {((items.length || date.length || location.length))
+                        ? <button
+                            onClick={(e) => { updateFilters({ type: 'clear' }); clearFilters(page); }}
+                            className='flex items-center justify-center w-16 h-6 bg-white rounded-full text-xs font-medium'>
+                            clear
+                        </button>
+                        : null}
+                    {(!isFilterApplied)
+                        ? <button
+                            onClick={(e) => { applyFilters({ items: items, date: date, location: location }, page); }}
+                            className='flex items-center justify-center w-16 h-6 bg-white rounded-full text-xs font-medium'>
+                            apply
+                        </button>
+                        : null}
                 </div>
                 {/* <div>{items.map((f) => <div key={f}>{f}</div>)}</div> */}
             </div>

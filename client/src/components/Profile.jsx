@@ -25,7 +25,7 @@ const Profile = () => {
             <div
                 className='h-full w-full overflow-x-auto scrollbar pt-12 flex'>
                     <Navbar theme='light'/>
-                <div className='flex flex-col gap-1 items-center flex-1 overflow-y-auto'>
+                <div className='flex flex-col gap-1 items-center flex-1 overflow-y-auto px-2'>
                     {userItems && userItems.map((item) => {
                         return <UserItem key={item.id} name={item.name} url={item.url} id={item.id} initialStatus={item.initialStatus} selectItem={ setItemInfo }/>
                     })}

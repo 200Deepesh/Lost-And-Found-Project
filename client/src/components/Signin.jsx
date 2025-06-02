@@ -42,14 +42,14 @@ const signin = () => {
     // POST REQUEST IN SERVER TO LOGIN ROUTE
     const res = await authUser(data)
 
-    if (!res.errors) {
-      setCookies({user: JSON.stringify(res)})
-      setUserId(data.emailId)
+    if (!res.error) {
+      setCookies(res)
+      setUserId(data._id)
       resetAll()
       navigate('/')
     }
     else{
-      setErrors(res.errors)
+      setErrors(res.error)
     }
   }
 

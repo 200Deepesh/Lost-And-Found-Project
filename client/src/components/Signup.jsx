@@ -8,7 +8,7 @@ const Signup = () => {
 
   const navigate = useNavigate()
 
-  const { emailId, password, setEmailId, setPassword, errors, setErrors, name, setName, checkbox, setCheckbox, resetAll } = useSignupStore(
+  const { emailId, password, setEmailId, setPassword, errors, setErrors, userName, setUserName, checkbox, setCheckbox, resetAll } = useSignupStore(
     useShallow((state) => (
       {
         emailId: state.emailId,
@@ -17,8 +17,8 @@ const Signup = () => {
         setPassword: state.setPassword,
         errors: state.errors,
         setErrors: state.setErrors,
-        name: state.name,
-        setName: state.setName,
+        userName: state.userName,
+        setUserName: state.setUserName,
         checkbox: state.checkbox,
         setCheckbox: state.setCheckbox,
         resetAll: state.resetAll
@@ -26,8 +26,8 @@ const Signup = () => {
   )
 
   const onSubmit = async (formData) => {
-    if (!formData.get('name')) {
-      setErrors({ name: { type: 'required', message: 'required' } })
+    if (!formData.get('userName')) {
+      setErrors({ userName: { type: 'required', message: 'required' } })
       return
     }
     if (!formData.get('emailId')) {
@@ -46,19 +46,19 @@ const Signup = () => {
     const data = {
       emailId: formData.get('emailId'),
       password: formData.get('password'),
-      name: formData.get('name'),
+      name: formData.get('userName'),
       checkbox: formData.get('checkbox'),
     }
     // POST REQUEST IN SERVER TO SIGNUP ROUTE
     const res = await registerUser(data)
     console.log(res)
 
-    if (!res.errors) {
+    if (!res.error) {
       resetAll()
       navigate('/signin')
     }
     else{
-      setErrors(res.errors)
+      setErrors(res.error)
     }
   }
 
@@ -69,8 +69,8 @@ const Signup = () => {
       </div>
       <form action={onSubmit} className='flex flex-col w-full gap-4'>
         <div className='flex flex-col w-full relative'>
-          <label htmlFor="name" className='text-[12px] font-medium'>Name</label>
-          <input type="text" name='name' value={name} onChange={(e) => { setName(e.target.value) }} placeholder='Enter your name' className='border border-[#D9D9D9] rounded-lg py-1 px-1 text-[10px]   focus-visible:outline-0 focus-visible:border-black placeholder:text-[8px] placeholder:text-[#D9D9D9] ' />
+          <label htmlFor="userName" className='text-[12px] font-medium'>Name</label>
+          <input type="text" name='userName' value={userName} onChange={(e) => { setUserName(e.target.value) }} placeholder='Enter your name' className='border border-[#D9D9D9] rounded-lg py-1 px-1 text-[10px]   focus-visible:outline-0 focus-visible:border-black placeholder:text-[8px] placeholder:text-[#D9D9D9] ' />
           {errors.name && <div className='text-[10px] text-red-500 w-fit absolute right-2 -bottom-4'>{errors.name.message}</div>}
         </div>
 

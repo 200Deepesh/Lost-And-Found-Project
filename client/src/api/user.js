@@ -1,7 +1,7 @@
 
 export const authUser = async (userInfo) => {
 
-    const res = await fetch('http://127.0.0.1:8000/login', {
+    const res = await fetch('http://127.0.0.1:8000/user/signin', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -16,7 +16,7 @@ export const authUser = async (userInfo) => {
 
 export const registerUser = async (userInfo) => {
 
-    const res = await fetch('http://127.0.0.1:8000/signup', {
+    const res = await fetch('http://127.0.0.1:8000/user/signup', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

@@ -84,14 +84,14 @@ const AddItem = () => {
 
     //POST REQUEST IN SERVER WITH DATA
     if (item?.id) {
-      const res = await updateItemByID(item.id, { itemInfo, studentInfo })
+      const res = await updateItemByID(item.id, { itemInfo, studentInfo, inputFile, initialStatus })
       if (res.errors) {
         setErrors(res.errors)
         return
       }
     }
     else {
-      const res = await addItem({ itemInfo, studentInfo })
+      const res = await addItem({ itemInfo, studentInfo, initialStatus, inputFile })
       if (res.errors) {
         setErrors(res.errors)
         return
@@ -100,7 +100,6 @@ const AddItem = () => {
 
     resetAll()
     navigate(-1)
-    console.log(data)
   }
 
   if (initialStatus != 'lost' && initialStatus != 'found') {
@@ -142,20 +141,20 @@ const AddItem = () => {
                 </div>
 
                 <div className='relative'>
-                <DropdownInputField
-                  placeholder={'Branch'}
-                  value={studentInfo?.branch} 
-                  setValue={(value)=>{setStudentInfo( 'branch', value)}}
-                  options={["AIDS", "CE", "CS", "EE", "MT", "IP", "IT"]}/>
+                  <DropdownInputField
+                    placeholder={'Branch'}
+                    value={studentInfo?.branch}
+                    setValue={(value) => { setStudentInfo('branch', value) }}
+                    options={["AIDS", "CE", "CS", "EE", "MT", "IP", "IT"]} />
                   {errors?.studentInfo?.sem && <div className='text-[10px] text-red-500 w-fit absolute right-1 top-1.5'>{errors?.studentInfo?.sem.message}</div>}
                 </div>
 
                 <div className='relative'>
-                <DropdownInputField
-                  placeholder={'Semester'}
-                  value={studentInfo?.sem} 
-                  setValue={(value)=>{setStudentInfo( 'sem', value)}}
-                  options={["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th"]}/>
+                  <DropdownInputField
+                    placeholder={'Semester'}
+                    value={studentInfo?.sem}
+                    setValue={(value) => { setStudentInfo('sem', value) }}
+                    options={["1st", "2nd", "3rd", "4th", "5th", "6th", "7th", "8th"]} />
                   {errors?.studentInfo?.sem && <div className='text-[10px] text-red-500 w-fit absolute right-1 top-1.5'>{errors?.studentInfo?.sem.message}</div>}
                 </div>
 
@@ -181,18 +180,11 @@ const AddItem = () => {
             </div>
           </div>
           <div className='flex items-center justify-center gap-4'>
-            {item
-              ? (<button
-                className='bg-[#050506CF] rounded-full px-4 py-1 text-white text-xs font-poppins cursor-pointer'
-                type='submit'>
-                Update
-              </button>)
-              : (<button
-                className='bg-[#050506CF] rounded-full px-4 py-1 text-white text-xs font-poppins cursor-pointer'
-                type='submit'>
-                Save
-              </button>)
-            }
+            <button
+              className='bg-[#050506CF] rounded-full px-4 py-1 text-white text-xs font-poppins cursor-pointer'
+              type='submit'>
+              {item ? 'Update' : 'save'}
+            </button>
             < button
               type='button'
               className='bg-[#050506CF] rounded-full px-4 py-1 text-white text-xs font-poppins cursor-pointer'
