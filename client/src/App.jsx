@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 import Layout from './layouts/Layout'
 import Home from './components/Home'
 import LostAndFoundLayout from './layouts/LostAndFoundLayout'
@@ -14,23 +14,27 @@ import Profile from './components/Profile'
 import { getUserIdByToken } from './api/user'
 import './App.css'
 import { useShallow } from 'zustand/react/shallow'
+import { useNavigate } from 'react-router'
 
 function App() {
 
   const { setUserId, userId } = useUserStore(
-    useShallow((state) =>( 
-    {
-      setUserId: state.setUserId,
-      userId: state.userId,
-    })));
+    useShallow((state) => (
+      {
+        setUserId: state.setUserId,
+        userId: state.userId,
+      })));
 
-  useEffect(() => {
-    (async () => {
-      const id = await getUserIdByToken();
+  (async () => {
+    console.log(userId);
+    if (userId == null) {
+      let id;
+      id = await getUserIdByToken();
       setUserId(id);
-      console.log(userId, id);
-    })()
-  }, []);
+      console.log('function is called');
+    }
+  })();
+
 
   return (
     <>
@@ -40,20 +44,21 @@ function App() {
             <Route index element={<Home />} />
             <Route
               path='/:page'
-              element={(!userId)
-                ? <Navigate to='../signin' replace={true} />
-                : <LostAndFoundLayout />
+              element={
+                (userId)
+                  ? <LostAndFoundLayout />
+                  : <Navigate to='../signin' replace={false} />
               } />
 
             <Route path='/user/:id' element={(!userId)
-              ? <Navigate to='../signin' replace={true} />
+              ? <Navigate to='../signin' replace={false} />
               : <Profile />
             } />
           </Route>
           <Route element={(userId)
-            ? <Navigate to='/' replace={true} />
+            ? <Navigate to='/' replace={false} />
             : <LoginAndSignupLayout />
-          }>
+          } >
             <Route path='/signup' element={<Signup />} />
             <Route path='/signin' element={<Signin />} />
           </Route>

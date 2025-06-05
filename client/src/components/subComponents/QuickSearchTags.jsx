@@ -5,19 +5,21 @@ import CloseBtn from './CloseBtn'
 
 const QuickSearchTags = ({ tags, setItemInfo }) => {
     const [status, setStatus] = useState(false)
-    const parent = useRef(null)
+    const addTagForm = useRef(null)
     const [tagName, setTagName] = useState('')
 
     useEffect(() => {
-      console.log('tags are getting rerender')
-    })
+        if (status) {
+            addTagForm.current.scrollIntoView(false);
+        }
+    }, [status])
 
     return (
         <>
-            <div ref={parent} className='w-full flex gap-1 flex-wrap overflow-auto'>
+            <div className='w-full flex gap-1 flex-wrap overflow-auto scroll-mb-1'>
                 {preDefineTags.map((tag) => <Tags key={tag} tagName={tag.toLowerCase()} tags={tags} setTag={(newTags) => { setItemInfo('tags', newTags) }} />)}
                 {status
-                    ? <div className='text-xs flex px-2 w-full'>
+                    ? <div className='text-xs flex px-2 w-full' ref={el => addTagForm.current = el}>
                         <input
                             type="text"
                             value={tagName}
@@ -39,14 +41,16 @@ const QuickSearchTags = ({ tags, setItemInfo }) => {
                                     return 0
                                 }
                             }}>Add</button>
-                        <CloseBtn onClick={() => { setStatus(status => !status) }} class=''/>
+                        <CloseBtn onClick={() => { setStatus(status => !status) }} class='' />
                     </div>
                     : (<div className='w-fit px-2 flex items-center'>
                         <img
                             src={plusSquareSvg}
                             alt=""
                             className='w-4 cursor-pointer'
-                            onClick={() => { setStatus(status => !status) }} />
+                            onClick={() => {
+                                setStatus(status => !status);
+                            }} />
                     </div>)
                 }
             </div>
@@ -57,7 +61,7 @@ const QuickSearchTags = ({ tags, setItemInfo }) => {
 export default QuickSearchTags
 
 const Tags = ({ tagName, setTag, tags }) => {
-    
+
     return (
         <div
             onClick={(e) => {

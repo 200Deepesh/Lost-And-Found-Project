@@ -29,8 +29,6 @@ export const getUserIdByToken = async () => {
         });
 
         const user = await res.json();
-
-        console.log("user", user);
         if (user) {
             return user._id;
         }

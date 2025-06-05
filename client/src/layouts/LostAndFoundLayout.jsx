@@ -8,7 +8,7 @@ import Navbar from '../components/Navbar';
 import ItemCard from '../components/subComponents/ItemCard'
 import { useLocation, useNavigate } from 'react-router';
 import { useEffect } from 'react';
-import { useItemStore } from '../store';
+import { useItemStore, useUserStore } from '../store';
 import { useShallow } from 'zustand/react/shallow';
 import ItemsInfo from '../components/ItemsInfo';
 import addPng from '/add.png'
@@ -16,17 +16,33 @@ import { getItems } from '../api/items';
 import FilterOnSvg from '/filter.svg'
 import FilterOffSvg from '/filterOff.svg'
 import { useItemInfoStore } from '../store';
+import { useInView } from 'react-intersection-observer'
 
 
 const LostAndFoundLayout = () => {
   const navigate = useNavigate()
   const filterBar = useRef(null)
-  const itemCardsContainor = useRef(null)
   const filterDisplayBtn = useRef(null)
   const location = useLocation()
+  const { page } = useParams();
   const { items, setItems } = useItemStore(
     useShallow((state) => ({ items: state.items, setItems: state.setItems }))
   )
+
+  const { ref: itemCardsContainor, inView, entry } = useInView({
+    root: null,
+    rootMargin: "0px",
+    threshold: "1",
+  });
+
+  useEffect(() => {
+    if (entry) {
+      entry.target.style.overflowY = inView ? 'auto' : 'hidden';
+    }
+
+  }, [inView])
+
+
 
   const { itemId, setItemId } = useItemInfoStore(
     useShallow((state) => (
@@ -45,38 +61,7 @@ const LostAndFoundLayout = () => {
       setItems(itemList)
     }
     )();
-
-    window.addEventListener(
-      "load",
-      (event) => {
-        createObserver();
-      },
-      false,
-    );
-
   }, [location])
-
-  const { page } = useParams();
-
-  const createObserver = () => {
-    const options = {
-      root: null,
-      rootMargin: "0px",
-      threshold: "1",
-    }
-    const handleIntersection = (entries, observer) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.style.overflowY = 'auto'
-        }
-        else {
-          entry.target.style.overflowY = 'hidden'
-        }
-      });
-    }
-    const observer = new IntersectionObserver(handleIntersection, options)
-    observer.observe(itemCardsContainor.current)
-  }
 
   const tougleFilter = (filterBar, filterDisplayBtn) => {
     let status = filterBar.current.dataset.isvisible
