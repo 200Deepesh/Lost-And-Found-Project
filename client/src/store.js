@@ -24,14 +24,14 @@ export const useFilterStore = create((set) => ({
         }
     },
     setIsFilterApplied: (boolean) => set((state) => ({ isFilterApplied: boolean }))
-}))
+}));
 
 export const useSearchStore = create((set) => ({
     query: '',
     setQuery: (input) => {
         set(() => ({ query: input }))
     }
-}))
+}));
 
 
 const initialSignupStates = {
@@ -46,24 +46,24 @@ export const useSignupStore = create((set) => ({
     ...initialSignupStates,
 
     setEmailId: (input) => {
-        set(() => ({ emailId: input }))
+        set(() => ({ emailId: input }));
     },
     setPassword: (input) => {
-        set(() => ({ password: input }))
+        set(() => ({ password: input }));
     },
     setUserName: (input) => {
-        set(() => ({ userName: input }))
+        set(() => ({ userName: input }));
     },
     setErrors: (input) => {
-        set(() => ({ errors: input }))
+        set(() => ({ errors: input }));
     },
     setCheckbox: (input) => {
-        set(() => ({ checkbox: input }))
+        set(() => ({ checkbox: input }));
     },
     resetAll: () => {
         set(() => ({
             ...initialSignupStates
-        }))
+        }));
     }
 }))
 
@@ -78,18 +78,18 @@ export const useLoginStore = create((set) => ({
     ...initialLoginState,
 
     setEmailId: (input) => {
-        set(() => ({ emailId: input }))
+        set(() => ({ emailId: input }));
     },
     setPassword: (input) => {
-        set(() => ({ password: input }))
+        set(() => ({ password: input }));
     },
     setErrors: (input) => {
-        set(() => ({ errors: input }))
+        set(() => ({ errors: input }));
     },
     resetAll: () => {
         set(() => ({
             ...initialLoginState,
-        }))
+        }));
     }
 }))
 
@@ -97,14 +97,14 @@ export const useLoginStore = create((set) => ({
 export const useItemStore = create((set) => ({
     items: [],
     setItems: (data) => {
-        set(() => ({ items: data }))
+        set(() => ({ items: data }));
     },
 }))
 
 export const useUserStore = create((set) => ({
     userId: null,
     setUserId: (id) => {
-        set(() => ({ userId: id }))
+        set(() => ({ userId: id }));
     }
 }))
 
@@ -129,24 +129,32 @@ const initialAddItemState = {
 export const useAddItemStore = create((set) => ({
     ...initialAddItemState,
     setInputFile: (file) => {
-        set((state) => ({ inputFile: file }))
+        set((state) => ({ inputFile: file }));
     },
     setStudentInfo: (key, value) => {
-        set((state) => ({ studentInfo: { ...state.studentInfo, [key]: value } }))
+        set((state) => ({ studentInfo: { ...state.studentInfo, [key]: value } }));
     },
     setItemInfo: (key, value) => {
-        set((state) => ({ itemInfo: { ...state.itemInfo, [key]: value } }))
+        set((state) => ({ itemInfo: { ...state.itemInfo, [key]: value } }));
     },
     setErrors: (errObj) => {
-        set((state) => ({ errors: errObj }))
+        set((state) => ({ errors: errObj }));
     },
     resetAll: () => {
-        set(() => ({ ...initialAddItemState }))
+        set(() => ({ ...initialAddItemState }));
     },
     setAll: (info) => {
-        set(() => ({ ...info }))
+        set(() => ({ ...info }));
     }
 }))
+
+export const useItemInfoStore = create((set) => ({
+    itemId: null,
+    setItemId: (id) => {
+        set(() => ({ itemId: id }));
+    }
+})
+)
 
 
 

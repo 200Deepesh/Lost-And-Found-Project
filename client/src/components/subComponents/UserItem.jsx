@@ -12,16 +12,11 @@ const UserItem = ({ name, url, initialStatus, selectItem, id }) => {
         resolved: '#00ccde',
     }
 
-    const handleClick = async () => {
-        const info = await getItemByID(id);
-        selectItem(info)
-    }
-
     return (
         <>
             <div
                 className='flex items-center gap-1 w-xl max-w-full bg-gray-100 rounded-xl px-2 py-1 justify-between cursor-pointer'
-                onClick={handleClick}>
+                onClick={selectItem}>
                 <img
                     src={url}
                     alt=""

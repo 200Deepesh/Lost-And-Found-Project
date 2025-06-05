@@ -15,6 +15,7 @@ import addPng from '/add.png'
 import { getItems } from '../api/items';
 import FilterOnSvg from '/filter.svg'
 import FilterOffSvg from '/filterOff.svg'
+import { useItemInfoStore } from '../store';
 
 
 const LostAndFoundLayout = () => {
@@ -22,11 +23,18 @@ const LostAndFoundLayout = () => {
   const filterBar = useRef(null)
   const itemCardsContainor = useRef(null)
   const filterDisplayBtn = useRef(null)
-  const [itemInfo, setItemInfo] = useState()
   const location = useLocation()
   const { items, setItems } = useItemStore(
     useShallow((state) => ({ items: state.items, setItems: state.setItems }))
   )
+
+  const { itemId, setItemId } = useItemInfoStore(
+    useShallow((state) => (
+      {
+        itemId: state.itemId,
+        setItemId: state.setItemId,
+      }))
+  );
 
   useEffect(() => {
     const page = location.pathname.split('/')[1];
@@ -45,7 +53,6 @@ const LostAndFoundLayout = () => {
       },
       false,
     );
-
 
   }, [location])
 
@@ -136,12 +143,12 @@ const LostAndFoundLayout = () => {
           </div>
           <div id="right" ref={itemCardsContainor} className='h-full w-full overflow-y-hidden'>
             <div className='h-fit w-full columns-[13.5rem]'>
-              {items.map((item) => { return <ItemCard item={item} key={item._id} selectItem={setItemInfo} /> })}
+              {items.map((item) => { return <ItemCard item={item} key={item._id} selectItem={() => { setItemId(item._id) }} /> })}
               {/* <ItemCard item={{ url: '/item.png', name: 'name', date: 'date', location: 'location', discription: 'discription' }} /> */}
             </div>
           </div>
         </div>
-        {itemInfo && <ItemsInfo itemInfo={itemInfo} deselectItem={() => { setItemInfo(null) }} />}
+        {itemId && <ItemsInfo itemId={itemId} deselectItem={() => { setItemId(null) }} />}
       </div>
     </>
   )

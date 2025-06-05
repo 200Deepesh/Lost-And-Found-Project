@@ -27,6 +27,7 @@ const Filters = ({ page }) => {
 
         const itemList = await getItemsUsingFilters(filters, page)
         setIsFilterApplied(true);
+        console.log(itemList);
         if (!itemList) {
             setItems([])
             return

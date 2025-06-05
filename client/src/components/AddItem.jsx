@@ -61,7 +61,7 @@ const AddItem = () => {
 
   const handleSubmit = async () => {
     console.log('form is submited')
-    console.log(item?.id)
+    console.log(item)
     const data = {
       studentInfo: studentInfo,
       itemInfo: itemInfo,
@@ -83,8 +83,8 @@ const AddItem = () => {
     }
 
     //POST REQUEST IN SERVER WITH DATA
-    if (item?.id) {
-      const res = await updateItemByID(item.id, { itemInfo, studentInfo, inputFile, initialStatus })
+    if (item?._id) {
+      const res = await updateItemByID(item._id, { itemInfo, studentInfo, inputFile, initialStatus })
       if (res.errors) {
         setErrors(res.errors)
         return

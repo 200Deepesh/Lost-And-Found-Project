@@ -2,13 +2,21 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import { getUserItems } from '../api/items'
 import UserItem from './subComponents/UserItem'
-import ItemsInfo from './ItemsInfo'
 import Navbar from './Navbar'
+import { useItemInfoStore } from '../store'
+import { useShallow } from 'zustand/react/shallow'
 
 const Profile = () => {
     const { id } = useParams()
     const [userItems, setUserItems] = useState([])
-    const [itemInfo, setItemInfo] = useState(null)
+    const { itemId, setItemId } = useItemInfoStore(
+        useShallow((state) => (
+            {
+                itemId: state.itemId,
+                setItemId: state.setItemId,
+            }))
+    );
+
     useEffect(() => {
         console.log(id);
         (
@@ -24,14 +32,13 @@ const Profile = () => {
         <>
             <div
                 className='h-full w-full overflow-x-auto scrollbar pt-12 flex'>
-                    <Navbar theme='light'/>
+                <Navbar theme='light' />
                 <div className='flex flex-col gap-1 items-center flex-1 overflow-y-auto px-2'>
                     {userItems && userItems.map((item) => {
-                        return <UserItem key={item.id} name={item.name} url={item.url} id={item.id} initialStatus={item.initialStatus} selectItem={ setItemInfo }/>
+                        console.log(item.id)
+                        return <UserItem key={item.id} name={item.name} url={item.url} id={item.id} initialStatus={item.initialStatus} selectItem={() => { setItemId(item.id) }} />
                     })}
                 </div>
-
-                {itemInfo && <ItemsInfo itemInfo={itemInfo} deselectItem={() => { setItemInfo(null) }} isTrusted={true}/>}
             </div>
         </>
     )

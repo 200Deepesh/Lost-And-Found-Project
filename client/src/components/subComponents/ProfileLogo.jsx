@@ -13,8 +13,7 @@ const ProfileLogo = () => {
         name: getCookies('name'),
         emailId: getCookies('emailId'),
     }
-
-    console.log(user);
+    
     const [display, setDisplay] = useState(false);
     const timeoutRef = useRef(null);
     const setUserId = useUserStore((state) => state.setUserId)

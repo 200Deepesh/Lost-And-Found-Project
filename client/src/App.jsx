@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import Layout from './layouts/Layout'
 import Home from './components/Home'
 import LostAndFoundLayout from './layouts/LostAndFoundLayout'
@@ -14,12 +14,13 @@ import Profile from './components/Profile'
 import './App.css'
 
 function App() {
-  const id = getCookies('_id')
-  const setUserId = useUserStore((state) => state.setUserId)
-  useEffect(() => {
-    if (id) setUserId(id)
-  })
+  const id = getCookies('_id');
+  const setUserId = useUserStore((state) => state.setUserId);
 
+  useEffect(() => {
+    if (id) setUserId(id);
+    
+  });
 
   return (
     <>
@@ -30,10 +31,11 @@ function App() {
             <Route
               path='/:page'
               element={(!id)
-                ? <Navigate to='../signin' replace={true}/>
+                ? <Navigate to='../signin' replace={true} />
                 : <LostAndFoundLayout />
               } />
 
+            <Route path='/user/:id' element={<Profile />} />
           </Route>
           <Route element={<LoginAndSignupLayout />}>
             <Route path='/signup' element={<Signup />} />
@@ -41,9 +43,9 @@ function App() {
           </Route>
           <Route path='/item/:id' element={<ItemsInfo />} />
           <Route path='/add/:initialStatus' element={<AddItem />} />
-          <Route path='/user/:id' element={<Profile />} />
         </Routes>
       </BrowserRouter>
+
     </>
   )
 }

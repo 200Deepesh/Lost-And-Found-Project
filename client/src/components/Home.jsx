@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router'
 import Navbar from './Navbar'
 import RecentItemsCard from './subComponents/RecentItemsCard'
 import Footer from './Footer'
+import { getRecentItem } from '../api/items'
+import { useShallow } from 'zustand/react/shallow'
+import { useItemInfoStore } from '../store'
 
 
 const Home = () => {
@@ -11,14 +14,25 @@ const Home = () => {
   const [recentItems, setRecentItems] = useState({
     lost: [],
     found: []
-  })
+  });
+  const { itemId, setItemId } = useItemInfoStore(
+    useShallow((state) => (
+      {
+        itemId: state.itemId,
+        setItemId: state.setItemId,
+      }))
+  );
   const navigate = useNavigate();
 
   useEffect(() => {
     //POST REQUEST IN SERVER FOR RECENT LOST AND FOUND DATA
 
-    setRecentItems(hardCodedRecentItems)
-  }, [])
+    (async () => {
+      const items = await getRecentItem();
+      setRecentItems(items);
+    })();
+
+  }, []);
 
 
   return (
@@ -27,7 +41,7 @@ const Home = () => {
         className='h-full w-full overflow-x-auto'>
         <div
           className='h-full w-full max-h-[40rem] pt-12 relative bg-[#ffffff] overflow-hidden flex items-center justify-center flex-col'>
-            <Navbar theme='light'/>
+          <Navbar theme='light' />
           <img
             src="/background.png"
             alt=""
@@ -80,7 +94,7 @@ const Home = () => {
               </h3>
               <div
                 className='grid grid-cols-2 gap-y-2 gap-x-3'>
-                {recentItems.found.map((item) => <RecentItemsCard key={item.name} item={item} />)}
+                {recentItems.found.map((item) => <RecentItemsCard key={item._id} item={item} selectItem={() => { setItemId(item._id) }} />)}
               </div>
             </div>
             <div
@@ -91,7 +105,7 @@ const Home = () => {
                 className='text-[#90A2C6] font-mrounded font-bold text-xl flex justify-center'>Recent lost items</h3>
               <div
                 className='grid  grid-cols-2 gap-y-2 gap-x-3'>
-                {recentItems.lost.map((item) => <RecentItemsCard key={item.name} item={item} />)}
+                {recentItems.lost.map((item) => <RecentItemsCard key={item._id} item={item} selectItem={() => { setItemId(item._id) }} />)}
               </div>
             </div>
           </div>
@@ -103,18 +117,3 @@ const Home = () => {
 }
 
 export default Home
-
-const hardCodedRecentItems = {
-  lost: [
-    { name: 'phone', date: '12/4/2025', location: 'Canteen', discription: 'discription', initialStatus: 'lost', url: '/item.png', studentInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
-    { name: 'wallet', date: '12/4/2025', location: 'Canteen', discription: 'discription', initialStatus: 'lost', url: '/item.png', studentInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
-    { name: 'assinment', date: '12/4/2025', location: 'Canteen', discription: 'discription', initialStatus: 'lost', url: '/item.png', studentInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
-    { name: 'bag', date: '12/4/2025', location: 'Canteen', discription: 'discription', initialStatus: 'lost', url: '/item.png', studentInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
-  ],
-  found: [
-    { name: 'wallet', date: '12/4/2025', location: 'Canteen', discription: 'discription', initialStatus: 'lost', url: '/item.png', studentInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
-    { name: 'assinment', date: '12/4/2025', location: 'Canteen', discription: 'discription', initialStatus: 'lost', url: '/item.png', studentInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
-    { name: 'bag', date: '12/4/2025', location: 'Canteen', discription: 'discription', initialStatus: 'lost', url: '/item.png', studentInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
-    { name: 'pen', date: '12/4/2025', location: 'Canteen', discription: 'discription', initialStatus: 'lost', url: '/item.png', studentInfo: { name: 'Dev Varma', branch: 'AIDS', sem: '2nd', phoneNo: '2463XXXXXX', emailId: 'contact@gmail.com' } },
-  ]
-}
