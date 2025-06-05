@@ -1,3 +1,4 @@
+import { getCookies } from "./cookies.js"
 
 export const authUser = async (userInfo) => {
 
@@ -7,11 +8,34 @@ export const authUser = async (userInfo) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(userInfo)
-    })
+    });
 
-    const data = await res.json()
+    const data = await res.json();
 
-    return data
+    return data;
+}
+
+export const getUserIdByToken = async () => {
+
+    const sessionId = getCookies('sessionId');
+
+    if (sessionId) {
+        const res = await fetch('http://127.0.0.1:8000/user/sessionId', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ sessionId: sessionId })
+        });
+
+        const user = await res.json();
+
+        console.log("user", user);
+        if (user) {
+            return user._id;
+        }
+    }
+    return null;
 }
 
 export const registerUser = async (userInfo) => {
@@ -22,9 +46,9 @@ export const registerUser = async (userInfo) => {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(userInfo)
-    })
+    });
 
-    const data = await res.json()
+    const data = await res.json();
 
-    return data
+    return data;
 }

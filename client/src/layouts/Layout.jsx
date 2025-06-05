@@ -4,9 +4,13 @@ import { useItemInfoStore } from '../store';
 import { useShallow } from 'zustand/react/shallow';
 import { useEffect } from 'react';
 import { getCookies } from '../api/cookies';
+import { useLocation } from 'react-router';
+import { useUserStore } from '../store';
 
 const Layout = () => {
 
+    const userId = useUserStore((state) => state.userId)
+    const location = useLocation();
     const { itemId, setItemId } = useItemInfoStore(
         useShallow((state) => (
             {
@@ -15,16 +19,11 @@ const Layout = () => {
             }))
     );
 
-    useEffect(() => {
-      console.log(getCookies('_id'));
-      console.log()
-    }, )
-    
 
     return (
         <>
             <Outlet />
-            {itemId && <ItemsInfo itemId={itemId} deselectItem={() => { setItemId(null); }} />}
+            {itemId && <ItemsInfo itemId={itemId} deselectItem={() => { setItemId(null); }} isTrusted={location.pathname.split('/').pop() == userId} />}
         </>
     )
 }

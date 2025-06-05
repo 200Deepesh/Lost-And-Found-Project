@@ -19,8 +19,12 @@ const signin = () => {
         resetAll: state.resetAll
       }))
   )
-
-  const setUserId = useUserStore((state)=> state.setUserId)
+  const { setUserId, userId } = useUserStore(
+    useShallow((state) => (
+      {
+        setUserId: state.setUserId,
+        userId: state.userId,
+      })));
 
   const navigate = useNavigate()
 
@@ -43,12 +47,13 @@ const signin = () => {
     const res = await authUser(data)
 
     if (!res.error) {
-      setCookies(res)
-      setUserId(data._id)
+      setCookies({ sessionId: res.sessionId, name: res.name })
+      setUserId(res._id)
+      console.log(userId)
       resetAll()
       navigate('/')
     }
-    else{
+    else {
       setErrors(res.error)
     }
   }

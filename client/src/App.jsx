@@ -11,16 +11,26 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router'
 import { getCookies } from './api/cookies'
 import { useUserStore } from './store'
 import Profile from './components/Profile'
+import { getUserIdByToken } from './api/user'
 import './App.css'
+import { useShallow } from 'zustand/react/shallow'
 
 function App() {
-  const id = getCookies('_id');
-  const setUserId = useUserStore((state) => state.setUserId);
+
+  const { setUserId, userId } = useUserStore(
+    useShallow((state) =>( 
+    {
+      setUserId: state.setUserId,
+      userId: state.userId,
+    })));
 
   useEffect(() => {
-    if (id) setUserId(id);
-    
-  });
+    (async () => {
+      const id = await getUserIdByToken();
+      setUserId(id);
+      console.log(userId, id);
+    })()
+  }, []);
 
   return (
     <>
@@ -30,14 +40,20 @@ function App() {
             <Route index element={<Home />} />
             <Route
               path='/:page'
-              element={(!id)
+              element={(!userId)
                 ? <Navigate to='../signin' replace={true} />
                 : <LostAndFoundLayout />
               } />
 
-            <Route path='/user/:id' element={<Profile />} />
+            <Route path='/user/:id' element={(!userId)
+              ? <Navigate to='../signin' replace={true} />
+              : <Profile />
+            } />
           </Route>
-          <Route element={<LoginAndSignupLayout />}>
+          <Route element={(userId)
+            ? <Navigate to='/' replace={true} />
+            : <LoginAndSignupLayout />
+          }>
             <Route path='/signup' element={<Signup />} />
             <Route path='/signin' element={<Signin />} />
           </Route>
