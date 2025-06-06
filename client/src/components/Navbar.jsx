@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react'
-import { NavLink } from 'react-router'
-import logo from '/logo.png'
-import { useState } from 'react'
-import { useUserStore } from '../store'
-import ProfileLogo from './subComponents/ProfileLogo'
+import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router';
+import logo from '/logo.png';
+import { useUserStore } from '../store';
+import ProfileLogo from './subComponents/ProfileLogo';
 
 const Navbar = ({ theme }) => {
 

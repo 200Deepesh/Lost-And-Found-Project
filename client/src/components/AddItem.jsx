@@ -1,16 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router'
-import FileInputField from './subComponents/FileInputField'
-import DateInputField from './subComponents/DateInputField'
-import Notfound from './notfound'
-import Navbar from './Navbar'
-import QuickSearchTags from './subComponents/QuickSearchTags'
-import { useNavigate } from 'react-router'
-import CloseBtn from './subComponents/CloseBtn'
-import { addItem, getItemByID, updateItemByID } from '../api/items'
-import { useAddItemStore } from '../store'
-import { useShallow } from 'zustand/react/shallow'
-import DropdownInputField from './subComponents/DropdownInputField'
+import { useState, useEffect, useNavigate } from 'react';
+import { useParams } from 'react-router';
+import FileInputField from './subComponents/FileInputField';
+import Notfound from './notfound';
+import Navbar from './Navbar';
+import QuickSearchTags from './subComponents/QuickSearchTags';
+import CloseBtn from './subComponents/CloseBtn';
+import { addItem, getItemByID, updateItemByID } from '../api/items';
+import { useAddItemStore } from '../store';
+import { useShallow } from 'zustand/react/shallow';
+import DropdownInputField from './subComponents/DropdownInputField';
 
 
 const AddItem = () => {
@@ -188,7 +186,11 @@ const AddItem = () => {
             < button
               type='button'
               className='bg-[#050506CF] rounded-full px-4 py-1 text-white text-xs font-poppins cursor-pointer'
-              onClick={() => { navigate(-1); return 0 }}>
+              onClick={() => {
+                navigate(-1);
+                resetAll();
+                return 0;
+              }}>
               Cancle
             </button>
           </div>

@@ -1,22 +1,19 @@
-import React, { useState, useRef } from 'react'
-import { useParams } from 'react-router'
+import { useRef, useEffect } from 'react';
 import Notfound from '../components/notfound';
 import Filters from '../components/Filters';
 import Searchbar from '../components/searchbar';
-import arrowPng from '/arrow.png'
+import arrowPng from '/arrow.png';
 import Navbar from '../components/Navbar';
 import ItemCard from '../components/subComponents/ItemCard'
-import { useLocation, useNavigate } from 'react-router';
-import { useEffect } from 'react';
-import { useItemStore, useUserStore } from '../store';
+import { useLocation, useNavigate, useParams } from 'react-router';
+import { useItemStore, useItemInfoStore } from '../store';
 import { useShallow } from 'zustand/react/shallow';
 import ItemsInfo from '../components/ItemsInfo';
-import addPng from '/add.png'
+import addPng from '/add.png';
 import { getItems } from '../api/items';
-import FilterOnSvg from '/filter.svg'
-import FilterOffSvg from '/filterOff.svg'
-import { useItemInfoStore } from '../store';
-import { useInView } from 'react-intersection-observer'
+import FilterOnSvg from '/filter.svg';
+import FilterOffSvg from '/filterOff.svg';
+import { useInView } from 'react-intersection-observer';
 
 
 const LostAndFoundLayout = () => {
@@ -78,7 +75,7 @@ const LostAndFoundLayout = () => {
   return (
     <>
       <div
-        className='h-full w-full overflow-x-auto scrollbar'>
+        className='h-full w-full overflow-y-auto scrollbar-hidden'>
         <div
           className='sm:h-96 h-72 w-full pt-12 relative bg-[#5849B0] flex flex-col justify-evenly'
           style={{ boxShadow: '0px 40px 30px 20px #5849B0' }}>
@@ -126,7 +123,7 @@ const LostAndFoundLayout = () => {
               <Filters page={page} />
             </div>
           </div>
-          <div id="right" ref={itemCardsContainor} className='h-full w-full overflow-y-hidden'>
+          <div id="right" ref={itemCardsContainor} className='h-full w-full overflow-y-hidden scrollbar-hidden'>
             <div className='h-fit w-full columns-[13.5rem]'>
               {items.map((item) => { return <ItemCard item={item} key={item._id} selectItem={() => { setItemId(item._id) }} /> })}
               {/* <ItemCard item={{ url: '/item.png', name: 'name', date: 'date', location: 'location', discription: 'discription' }} /> */}

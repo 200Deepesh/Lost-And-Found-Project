@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import FilterButton from './subComponents/filterButton'
-import { useFilterStore } from '../store'
-import { useShallow } from 'zustand/react/shallow'
-import { getItemsUsingFilters, getItems } from '../api/items'
-import { useItemStore } from '../store'
+import FilterButton from './subComponents/filterButton';
+import { useFilterStore, useItemStore } from '../store'
+import { useShallow } from 'zustand/react/shallow';
+import { getItemsUsingFilters, getItems } from '../api/items';
 
 
 const Filters = ({ page }) => {

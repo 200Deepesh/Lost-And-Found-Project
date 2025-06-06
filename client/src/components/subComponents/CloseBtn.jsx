@@ -1,5 +1,5 @@
-import React from 'react'
-import closeSvg from '/close.svg'
+import React from 'react';
+import closeSvg from '/close.svg';
 
 const CloseBtn = ({ onClick, label }) => {
     return (

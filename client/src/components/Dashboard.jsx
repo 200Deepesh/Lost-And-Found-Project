@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router'
-import { getUserItems } from '../api/items'
-import UserItem from './subComponents/UserItem'
-import Navbar from './Navbar'
-import { useItemInfoStore } from '../store'
-import { useShallow } from 'zustand/react/shallow'
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+import { getUserItems } from '../api/items';
+import UserItem from './subComponents/UserItem';
+import Navbar from './Navbar';
+import { useItemInfoStore } from '../store';
+import { useShallow } from 'zustand/react/shallow';
 
-const Profile = () => {
+const Dashboard = () => {
     const { id } = useParams()
     const [userItems, setUserItems] = useState([])
     const { itemId, setItemId } = useItemInfoStore(
@@ -31,7 +31,7 @@ const Profile = () => {
     return (
         <>
             <div
-                className='h-full w-full overflow-x-auto scrollbar pt-12 flex'>
+                className='h-full w-full overflow-x-auto pt-12 flex scrollbar-thin'>
                 <Navbar theme='light' />
                 <div className='flex flex-col gap-1 items-center flex-1 overflow-y-auto px-2'>
                     {userItems && userItems.map((item) => {
@@ -44,4 +44,4 @@ const Profile = () => {
     )
 }
 
-export default Profile
+export default Dashboard

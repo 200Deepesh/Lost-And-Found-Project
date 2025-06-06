@@ -1,9 +1,8 @@
-import React from 'react'
-import { useLoginStore, useUserStore } from '../store'
-import { useShallow } from 'zustand/react/shallow'
-import { useNavigate } from 'react-router'
-import { authUser } from '../api/user'
-import { setCookies } from '../api/cookies'
+import { useLoginStore, useUserStore } from '../store';
+import { useShallow } from 'zustand/react/shallow';
+import { useNavigate } from 'react-router';
+import { authUser } from '../api/user';
+import { setCookies } from '../api/cookies';
 
 const signin = () => {
 
@@ -47,7 +46,7 @@ const signin = () => {
     const res = await authUser(data)
 
     if (!res.error) {
-      setCookies({ sessionId: res.sessionId, name: res.name })
+      setCookies({ sessionId: res.sessionId, name: res.name, userId: res._id })
       setUserId(res._id)
       console.log(userId)
       resetAll()

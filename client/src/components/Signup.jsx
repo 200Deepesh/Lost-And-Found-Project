@@ -1,8 +1,7 @@
-import React from 'react'
-import { useSignupStore } from '../store'
-import { useShallow } from 'zustand/react/shallow'
-import { useNavigate } from 'react-router'
-import { registerUser } from '../api/user'
+import { useSignupStore } from '../store';
+import { useShallow } from 'zustand/react/shallow';
+import { useNavigate } from 'react-router';
+import { registerUser } from '../api/user';
 
 const Signup = () => {
 

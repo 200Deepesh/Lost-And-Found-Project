@@ -1,15 +1,16 @@
-import { Outlet } from 'react-router'
+import { Outlet, useLocation } from 'react-router';
 import ItemsInfo from '../components/ItemsInfo';
-import { useItemInfoStore } from '../store';
+import { useItemInfoStore, useUserStore } from '../store';
 import { useShallow } from 'zustand/react/shallow';
-import { useEffect } from 'react';
-import { getCookies } from '../api/cookies';
-import { useLocation } from 'react-router';
-import { useUserStore } from '../store';
 
 const Layout = () => {
 
-    const userId = useUserStore((state) => state.userId)
+    const { setUserId, userId } = useUserStore(
+        useShallow((state) => (
+            {
+                setUserId: state.setUserId,
+                userId: state.userId,
+            })));
     const location = useLocation();
     const { itemId, setItemId } = useItemInfoStore(
         useShallow((state) => (
@@ -18,6 +19,8 @@ const Layout = () => {
                 setItemId: state.setItemId,
             }))
     );
+    
+
 
 
     return (

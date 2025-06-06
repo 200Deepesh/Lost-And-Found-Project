@@ -1,8 +1,7 @@
-import React from 'react'
-import { useNavigate, useLocation } from 'react-router'
-import searchPng from '/search.png'
-import { useSearchStore } from '../store'
-import { useShallow } from 'zustand/react/shallow'
+import { useNavigate, useLocation } from 'react-router';
+import searchPng from '/search.png';
+import { useSearchStore } from '../store';
+import { useShallow } from 'zustand/react/shallow';
 
 
 

@@ -1,11 +1,8 @@
-import React, { useEffect } from 'react'
-import { Outlet } from 'react-router'
-import arrowPng from '/Arrow-left-circle.png'
-import backgroundImg from '/background.png'
-import googleLogo from '/google-logo.png'
-import appleLogo from '/apple-logo.png'
-import { Link } from 'react-router'
-import { useNavigate } from 'react-router'
+import { Outlet, Link, useNavigate } from 'react-router';
+import arrowPng from '/Arrow-left-circle.png';
+import backgroundImg from '/background.png';
+import googleLogo from '/google-logo.png';
+import appleLogo from '/apple-logo.png';
 
 const LoginAndSignupLayout = () => {
 

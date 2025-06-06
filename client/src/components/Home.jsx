@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import Searchbar from './searchbar'
-import { useNavigate } from 'react-router'
-import Navbar from './Navbar'
-import RecentItemsCard from './subComponents/RecentItemsCard'
-import Footer from './Footer'
-import { getRecentItem } from '../api/items'
-import { useShallow } from 'zustand/react/shallow'
-import { useItemInfoStore } from '../store'
+import { useEffect, useState } from 'react';
+import Searchbar from './searchbar';
+import { useNavigate } from 'react-router';
+import Navbar from './Navbar';
+import RecentItemsCard from './subComponents/RecentItemsCard';
+import Footer from './Footer';
+import { getRecentItem } from '../api/items';
+import { useShallow } from 'zustand/react/shallow';
+import { useItemInfoStore } from '../store';
 
 
 const Home = () => {
@@ -38,7 +38,7 @@ const Home = () => {
   return (
     <>
       <div
-        className='h-full w-full overflow-x-auto'>
+        className='h-full w-full overflow-y-auto scrollbar-hidden'>
         <div
           className='h-full w-full max-h-[40rem] pt-12 relative bg-[#ffffff] overflow-hidden flex items-center justify-center flex-col'>
           <Navbar theme='light' />

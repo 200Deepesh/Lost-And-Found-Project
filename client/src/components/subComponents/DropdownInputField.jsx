@@ -1,6 +1,5 @@
-import React from 'react'
-import { useState } from 'react'
-import downArrow from '/downArrow.svg'
+import { useState } from 'react';
+import downArrow from '/downArrow.svg';
 
 const DropdownInputField = ({ placeholder, value, options, setValue }) => {
     const [displayOptions, setDisplayOptions] = useState(false)

@@ -1,6 +1,5 @@
-import React from 'react'
-import { useRef, useState, useEffect } from 'react'
-import addCircleSvg from '/add-circle.svg'
+import { useRef } from 'react';
+import addCircleSvg from '/add-circle.svg';
 
 const FileInputField = ({inputFile, setInputFile, id, url}) => {
 

@@ -1,8 +1,5 @@
-import React from 'react'
-import resolveSvg from '/resolve.svg'
-import questionSvg from '/question.svg'
-import editSvg from '/edit.svg'
-import { getItemByID } from '../../api/items'
+import resolveSvg from '/resolve.svg';
+import questionSvg from '/question.svg';
 
 const UserItem = ({ name, url, initialStatus, selectItem, id }) => {
 

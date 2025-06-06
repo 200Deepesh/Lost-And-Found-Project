@@ -1,7 +1,6 @@
-import React from 'react'
-import { useState, useRef, useEffect } from 'react'
-import plusSquareSvg from '/plusSquare.svg'
-import CloseBtn from './CloseBtn'
+import { useState, useRef, useEffect } from 'react';
+import plusSquareSvg from '/plusSquare.svg';
+import CloseBtn from './CloseBtn';
 
 const QuickSearchTags = ({ tags, setItemInfo }) => {
     const [status, setStatus] = useState(false)
@@ -16,7 +15,7 @@ const QuickSearchTags = ({ tags, setItemInfo }) => {
 
     return (
         <>
-            <div className='w-full flex gap-1 flex-wrap overflow-auto scroll-mb-1'>
+            <div className='w-full flex gap-1 flex-wrap overflow-auto scroll-mb-1 scrollbar-thin'>
                 {preDefineTags.map((tag) => <Tags key={tag} tagName={tag.toLowerCase()} tags={tags} setTag={(newTags) => { setItemInfo('tags', newTags) }} />)}
                 {status
                     ? <div className='text-xs flex px-2 w-full' ref={el => addTagForm.current = el}>

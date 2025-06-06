@@ -1,7 +1,6 @@
-import React from 'react'
-import { useState, useEffect, useRef } from 'react'
-import { useFilterStore } from '../../store'
-import { useShallow } from 'zustand/react/shallow'
+import { useState, useEffect, useRef } from 'react';
+import { useFilterStore } from '../../store';
+import { useShallow } from 'zustand/react/shallow';
 
 const filterButton = ({ filtername, filtervalue }) => {
     const { filter, updateFilters, setIsFilterApplied } = useFilterStore(

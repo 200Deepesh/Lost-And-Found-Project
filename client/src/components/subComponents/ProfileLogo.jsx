@@ -1,10 +1,9 @@
-import React from 'react'
-import { useState, useRef } from 'react'
-import { Link } from 'react-router'
-import { removeCookies, setCookies } from '../../api/cookies'
-import { useShallow } from 'zustand/react/shallow'
-import { useUserStore } from '../../store'
-import accountSvg from '/account.svg'
+import { useState, useRef } from 'react';
+import { Link } from 'react-router';
+import { removeCookies } from '../../api/cookies';
+import { useShallow } from 'zustand/react/shallow';
+import { useUserStore } from '../../store';
+import accountSvg from '/account.svg';
 
 
 const ProfileLogo = () => {

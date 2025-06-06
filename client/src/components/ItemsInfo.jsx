@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router'
-import phonePng from '/phone.png'
-import mailPng from '/mail.png'
-import locationPng from '/location_on.png'
-import todayPng from '/today.png'
-import CloseBtn from './subComponents/CloseBtn'
-import { useNavigate } from 'react-router'
-import { getItemByID } from '../api/items'
+import { useEffect, useState } from 'react';
+import phonePng from '/phone.png';
+import mailPng from '/mail.png';
+import locationPng from '/location_on.png';
+import todayPng from '/today.png';
+import CloseBtn from './subComponents/CloseBtn';
+import { useNavigate } from 'react-router';
+import { getItemByID } from '../api/items';
 
 const ItemsInfo = ({ itemId, deselectItem, isTrusted }) => {
     const navigate = useNavigate()

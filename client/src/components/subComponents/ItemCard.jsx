@@ -1,8 +1,5 @@
-import React from 'react'
-import itemPng from '/item.png'
-import todayPng from '/today.png'
-import locationPng from '/location_on.png'
-import { getItemByID } from '../../api/items'
+import todayPng from '/today.png';
+import locationPng from '/location_on.png';
 
 const ItemCard = ({ item, selectItem }) => {
 

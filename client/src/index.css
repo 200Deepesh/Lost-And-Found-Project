@@ -10,19 +10,24 @@
 }
 
 @layer utilities {
-  .scrollbar::-webkit-scrollbar {
+  .scrollbar-hidden::-webkit-scrollbar {
     width: 0px;
+    padding: 0px;
   }
 
-  .scrollbar::-webkit-scrollbar-track {
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 5px;
+    padding: 0px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
     border-radius: 100vh;
     background: transparent;
   }
 
-  .scrollbar::-webkit-scrollbar-thumb {
-    background: #e0cbcb;
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #8b8b8b;
     border-radius: 100vh;
-    border: 1px solid #f6f7ed;
   }
 
   .scrollbar::-webkit-scrollbar-thumb:hover {
