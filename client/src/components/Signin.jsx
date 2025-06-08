@@ -46,7 +46,7 @@ const signin = () => {
     const res = await authUser(data)
 
     if (!res.error) {
-      setCookies({ sessionId: res.sessionId, name: res.name, userId: res._id })
+      setCookies({ sessionId: res.sessionId, name: res.name })
       setUserId(res._id)
       console.log(userId)
       resetAll()

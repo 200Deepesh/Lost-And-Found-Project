@@ -3,21 +3,41 @@ import plusSquareSvg from '/plusSquare.svg';
 import CloseBtn from './CloseBtn';
 
 const QuickSearchTags = ({ tags, setItemInfo }) => {
-    const [status, setStatus] = useState(false)
+    const [toggleForm, setToggleForm] = useState(false)
     const addTagForm = useRef(null)
     const [tagName, setTagName] = useState('')
 
     useEffect(() => {
-        if (status) {
+        if (toggleForm) {
             addTagForm.current.scrollIntoView(false);
         }
-    }, [status])
+    }, [toggleForm])
+
+    const handleClick = (e) => {
+        e.preventDefault()
+        if (tagName) {
+            setToggleForm(toggleForm => !toggleForm)
+            console.log(!preDefineTags.includes(tagName.toLowerCase()))
+            if(!preDefineTags.includes(tagName.toLowerCase())){
+                preDefineTags.push(tagName.toLowerCase())
+            }
+            if(!tags.includes(tagName.toLowerCase())){
+                setItemInfo('tags', [...tags, tagName.toLowerCase()])
+            }
+            setTagName('')
+            console.log(tags)
+        }
+        else {
+            console.log('some thing new')
+            return 0
+        }
+    }
 
     return (
         <>
             <div className='w-full flex gap-1 flex-wrap overflow-auto scroll-mb-1 scrollbar-thin'>
                 {preDefineTags.map((tag) => <Tags key={tag} tagName={tag.toLowerCase()} tags={tags} setTag={(newTags) => { setItemInfo('tags', newTags) }} />)}
-                {status
+                {toggleForm
                     ? <div className='text-xs flex px-2 w-full' ref={el => addTagForm.current = el}>
                         <input
                             type="text"
@@ -26,21 +46,8 @@ const QuickSearchTags = ({ tags, setItemInfo }) => {
                             className='rounded-full border px-2 py-0.5 max-w-32' />
                         <button
                             className='bg-[#050506CF] rounded-full px-2 py-0.5 text-white text-xs font-poppins cursor-pointer ml-2'
-                            onClick={(e) => {
-                                e.preventDefault()
-                                if (tagName) {
-                                    setStatus(status => !status)
-                                    preDefineTags.push(tagName.toLowerCase())
-                                    setItemInfo('tags', [...tags, tagName.toLowerCase()])
-                                    setTagName('')
-                                    console.log(tags)
-                                }
-                                else {
-                                    console.log('some thing new')
-                                    return 0
-                                }
-                            }}>Add</button>
-                        <CloseBtn onClick={() => { setStatus(status => !status) }} class='' />
+                            onClick={handleClick}>Add</button>
+                        <CloseBtn onClick={() => { setToggleForm(toggleForm => !toggleForm) }} class='' />
                     </div>
                     : (<div className='w-fit px-2 flex items-center'>
                         <img
@@ -48,7 +55,7 @@ const QuickSearchTags = ({ tags, setItemInfo }) => {
                             alt=""
                             className='w-4 cursor-pointer'
                             onClick={() => {
-                                setStatus(status => !status);
+                                setToggleForm(toggleForm => !toggleForm);
                             }} />
                     </div>)
                 }
@@ -74,4 +81,4 @@ const Tags = ({ tagName, setTag, tags }) => {
 }
 
 
-const preDefineTags = ['Wallet', 'Phone', 'Watch', 'Bottle', 'Admin Block', 'Keys', 'Canteen', 'Today', 'EarBuds', 'Books', 'ID Card']
+const preDefineTags = ['wallet', 'phone', 'watch', 'bottle', 'admin block', 'keys', 'canteen', 'today', 'earbuds', 'books', 'id card']

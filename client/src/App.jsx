@@ -13,6 +13,7 @@ import { useUserStore } from './store';
 import Dashboard from './components/Dashboard';
 import { getUserIdByToken } from './api/user';
 import { useShallow } from 'zustand/react/shallow';
+import ProtectedRoutes from './components/ProtectedRoutes';
 import './App.css';
 
 function App() {
@@ -24,17 +25,15 @@ function App() {
         userId: state.userId,
       })));
 
-    let id = getCookies('userId');
-    console.log(id);
 
-  
   useEffect(() => {
     (async () => {
-      id = await getUserIdByToken();
+      const id = await getUserIdByToken();
       setUserId(id);
+      console.log(userId);
     })();
   }, [])
-  
+
 
 
   return (
@@ -43,28 +42,22 @@ function App() {
         <Routes>
           <Route element={<Layout />}>
             <Route index element={<Home />} />
-            <Route
-              path='/:page'
-              element={
-                (id)
-                  ? <LostAndFoundLayout />
-                  : <Navigate to='../signin' replace={false} />
-              } />
 
-            <Route path='/user/:id' element={(!id)
-              ? <Navigate to='../signin' replace={false} />
-              : <Dashboard />
-            } />
+            <Route element={<ProtectedRoutes />}>
+              <Route path='/:page' element={<LostAndFoundLayout />} />
+              <Route path='/user/:id' element={<Dashboard />} />
+            </Route>
+
           </Route>
-          <Route element={(id)
-            ? <Navigate to='/' replace={false} />
-            : <LoginAndSignupLayout />
-          } >
+          <Route element={<LoginAndSignupLayout />} >
             <Route path='/signup' element={<Signup />} />
             <Route path='/signin' element={<Signin />} />
           </Route>
-          <Route path='/item/:id' element={<ItemsInfo />} />
-          <Route path='/add/:initialStatus' element={<AddItem />} />
+
+          <Route element={<ProtectedRoutes />}>
+            <Route path='/item/:id' element={<ItemsInfo />} />
+            <Route path='/add/:initialStatus' element={<AddItem />} />
+          </Route>
         </Routes>
       </BrowserRouter>
 

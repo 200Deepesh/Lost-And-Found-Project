@@ -102,9 +102,9 @@ export const useItemStore = create((set) => ({
 }))
 
 export const useUserStore = create((set) => ({
-    userId: null,
+    userId: undefined,
     setUserId: (id) => {
-        set(() => ({ userId: id }));
+        set(() => ({ userId: id ? id : null }));
     }
 }))
 
