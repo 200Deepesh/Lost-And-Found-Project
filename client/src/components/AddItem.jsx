@@ -174,7 +174,7 @@ const AddItem = () => {
             </div>
             <div id='tags' className='border-2 box-border border-[#D9D9D9] p-1 rounded-xl w-64 max-w-96 gap-1 flex flex-col max-h-24'>
               <div className='text-[#00000066] text-sm relative'>Tags for Quick Search</div>
-              <QuickSearchTags tags={itemInfo?.tags} setItemInfo={setItemInfo} />
+              <QuickSearchTags tags={itemInfo?.tags} setItemInfo={setItemInfo} edit={!!item}/>
             </div>
           </div>
           <div className='flex items-center justify-center gap-4'>

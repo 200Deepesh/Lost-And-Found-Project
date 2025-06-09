@@ -3,9 +3,14 @@ import { useFilterStore } from '../../store';
 import { useShallow } from 'zustand/react/shallow';
 
 const filterButton = ({ filtername, filtervalue }) => {
-    const { filter, updateFilters, setIsFilterApplied } = useFilterStore(
-            useShallow((state)=>({ filter: state[filtername], updateFilters: state.updateFilters, setIsFilterApplied: state.setIsFilterApplied}))
-        )
+    const { filter, updateFilters, displayApplyBtn, setDisplayApplyBtn } = useFilterStore(
+        useShallow((state) => ({
+            filter: state[filtername],
+            updateFilters: state.updateFilters,
+            displayApplyBtn: state.displayApplyBtn,
+            setDisplayApplyBtn: state.setDisplayApplyBtn,
+        }))
+    )
     let [isSelected, setIsSelected] = useState()
     const btn = useRef(null)
 
@@ -19,8 +24,10 @@ const filterButton = ({ filtername, filtervalue }) => {
 
 
 
-    const onClick = async (filterName, filterValue) => {
-        setIsFilterApplied(false)
+    const handleClick = async (filterName, filterValue) => {
+        if (!displayApplyBtn) {
+            setDisplayApplyBtn(true);
+        }
         let type = isSelected ? 'remove' : 'add'
         await updateFilters({ type: type, filterName: filterName, filterValue: filterValue })
         if (!isSelected) {
@@ -32,11 +39,12 @@ const filterButton = ({ filtername, filtervalue }) => {
             btn.current.style.border = ''
         }
         setIsSelected(!isSelected)
+        console.log(isSelected);
     }
 
     return (
         <>
-            <button ref={btn} onClick={() => onClick(filtername, filtervalue)} className='bg-white rounded-full py-1 flex items-center justify-center min-w-fit font-mrounded text-xs box-border h-6 cursor-pointer font-normal border-0'>{filtervalue}</button>
+            <button ref={btn} onClick={() => handleClick(filtername, filtervalue)} className='bg-white rounded-full py-1 flex items-center justify-center min-w-fit font-mrounded text-xs box-border h-6 cursor-pointer font-normal border-0'>{filtervalue}</button>
         </>
     )
 }

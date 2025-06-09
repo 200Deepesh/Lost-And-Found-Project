@@ -9,7 +9,8 @@ export const useFilterStore = create((set) => ({
 
     ...initialFilterStates,
 
-    isFilterApplied: true,
+    displayApplyBtn: false,
+    displayClearBtn: false,
     updateFilters: (action) => {
         switch (action.type) {
             case 'add': set((state) => ({ [action.filterName]: [...state[action.filterName], action.filterValue] }))
@@ -23,7 +24,8 @@ export const useFilterStore = create((set) => ({
             }
         }
     },
-    setIsFilterApplied: (boolean) => set((state) => ({ isFilterApplied: boolean }))
+    setDisplayApplyBtn: (boolean) => set((state) => ({ displayApplyBtn: boolean})),
+    setDisplayClearBtn: (boolean) => set((state) => ({ displayClearBtn: boolean})),
 }));
 
 export const useSearchStore = create((set) => ({

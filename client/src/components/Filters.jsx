@@ -6,14 +6,16 @@ import { getItemsUsingFilters, getItems } from '../api/items';
 
 const Filters = ({ page }) => {
 
-    const { items, location, date, updateFilters, isFilterApplied, setIsFilterApplied } = useFilterStore(
+    const { items, location, date, updateFilters, displayApplyBtn, displayClearBtn, setDisplayClearBtn, setDisplayApplyBtn } = useFilterStore(
         useShallow((state) => ({
             items: state.items,
             location: state.location,
             date: state.date,
             updateFilters: state.updateFilters,
-            isFilterApplied: state.isFilterApplied,
-            setIsFilterApplied: state.setIsFilterApplied
+            displayApplyBtn: state.displayApplyBtn,
+            setDisplayApplyBtn: state.setDisplayApplyBtn,
+            setDisplayClearBtn: state.setDisplayClearBtn,
+            displayClearBtn: state.displayClearBtn,
         }))
     )
 
@@ -24,7 +26,8 @@ const Filters = ({ page }) => {
         //POST REQUEST TO SERVER WITH BODY {FILTERS: FILTERS, TYPE: PAGE}
 
         const itemList = await getItemsUsingFilters(filters, page)
-        setIsFilterApplied(true);
+        setDisplayApplyBtn(false);
+        setDisplayClearBtn(true);
         console.log(itemList);
         if (!itemList) {
             setItems([])
@@ -55,16 +58,23 @@ const Filters = ({ page }) => {
                 })}
 
                 <div className='flex justify-evenly'>
-                    {((items.length || date.length || location.length))
+                    {(displayClearBtn)
                         ? <button
-                            onClick={(e) => { updateFilters({ type: 'clear' }); clearFilters(page); }}
+                            onClick={(e) => {
+                                updateFilters({ type: 'clear' });
+                                clearFilters(page);
+                                setDisplayClearBtn(false);
+                                setDisplayApplyBtn(false);
+                            }}
                             className='flex items-center justify-center w-16 h-6 bg-white rounded-full text-xs font-medium'>
                             clear
                         </button>
                         : null}
-                    {(!isFilterApplied)
+                    {(displayApplyBtn)
                         ? <button
-                            onClick={(e) => { applyFilters({ items: items, date: date, location: location }, page); }}
+                            onClick={(e) => { 
+                                applyFilters({ items: items, date: date, location: location }, page); 
+                            }}
                             className='flex items-center justify-center w-16 h-6 bg-white rounded-full text-xs font-medium'>
                             apply
                         </button>
