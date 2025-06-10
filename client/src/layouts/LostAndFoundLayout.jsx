@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import Notfound from '../components/notfound';
+import Notfound from '../pages/Notfound';
 import Filters from '../components/Filters';
 import Searchbar from '../components/searchbar';
 import arrowPng from '/arrow.png';
@@ -8,7 +8,7 @@ import ItemCard from '../components/subComponents/ItemCard'
 import { useLocation, useNavigate, useParams } from 'react-router';
 import { useItemStore, useItemInfoStore } from '../store';
 import { useShallow } from 'zustand/react/shallow';
-import ItemsInfo from '../components/ItemsInfo';
+import ItemsInfo from '../pages/ItemsInfo';
 import addPng from '/add.png';
 import { getItems } from '../api/items';
 import FilterOnSvg from '/filter.svg';

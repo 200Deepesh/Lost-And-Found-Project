@@ -3,7 +3,7 @@ import phonePng from '/phone.png';
 import mailPng from '/mail.png';
 import locationPng from '/location_on.png';
 import todayPng from '/today.png';
-import CloseBtn from './subComponents/CloseBtn';
+import CloseBtn from '../components/subComponents/CloseBtn';
 import { useNavigate } from 'react-router';
 import { getItemByID } from '../api/items';
 

@@ -1,5 +1,5 @@
 import { Outlet, useLocation } from 'react-router';
-import ItemsInfo from '../components/ItemsInfo';
+import ItemsInfo from '../pages/ItemsInfo';
 import { useItemInfoStore, useUserStore } from '../store';
 import { useShallow } from 'zustand/react/shallow';
 

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import Searchbar from './searchbar';
+import Searchbar from '../components/searchbar';
 import { useNavigate } from 'react-router';
-import Navbar from './Navbar';
-import RecentItemsCard from './subComponents/RecentItemsCard';
-import Footer from './Footer';
+import Navbar from '../components/Navbar';
+import RecentItemsCard from '../components/subComponents/RecentItemsCard';
+import Footer from '../components/Footer';
 import { getRecentItem } from '../api/items';
 import { useShallow } from 'zustand/react/shallow';
 import { useItemInfoStore } from '../store';

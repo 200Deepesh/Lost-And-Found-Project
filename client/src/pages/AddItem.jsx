@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router';
-import FileInputField from './subComponents/FileInputField';
-import Notfound from './notfound';
-import Navbar from './Navbar';
-import QuickSearchTags from './subComponents/QuickSearchTags';
-import CloseBtn from './subComponents/CloseBtn';
+import FileInputField from '../components/subComponents/FileInputField';
+import Notfound from './Notfound';
+import Navbar from '../components/Navbar';
+import QuickSearchTags from '../components/subComponents/QuickSearchTags';
+import CloseBtn from '../components/subComponents/CloseBtn';
 import { addItem, getItemByID, updateItemByID } from '../api/items';
 import { useAddItemStore } from '../store';
 import { useShallow } from 'zustand/react/shallow';
-import DropdownInputField from './subComponents/DropdownInputField';
+import DropdownInputField from '../components/subComponents/DropdownInputField';
 
 
 const AddItem = () => {

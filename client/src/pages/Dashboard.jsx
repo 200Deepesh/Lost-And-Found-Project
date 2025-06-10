@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { getUserItems } from '../api/items';
-import UserItem from './subComponents/UserItem';
-import Navbar from './Navbar';
+import UserItem from '../components/subComponents/UserItem';
+import Navbar from '../components/Navbar';
 import { useItemInfoStore } from '../store';
 import { useShallow } from 'zustand/react/shallow';
 
