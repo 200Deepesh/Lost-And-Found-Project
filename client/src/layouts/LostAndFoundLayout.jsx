@@ -32,12 +32,9 @@ const LostAndFoundLayout = () => {
     threshold: "1",
   });
 
-  useEffect(() => {
-    if (entry) {
-      entry.target.style.overflowY = inView ? 'auto' : 'hidden';
-    }
-
-  }, [inView])
+  if (entry) {
+    entry.target.style.overflowY = inView ? 'auto' : 'hidden';
+  }
 
 
 

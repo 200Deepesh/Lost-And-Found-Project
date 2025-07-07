@@ -7,30 +7,25 @@ import ProfileLogo from './subComponents/ProfileLogo';
 const Navbar = ({ theme }) => {
 
   const userId = useUserStore((state) => state.userId)
-
-  const [textColor, setTextColor] = useState('')
-  useEffect(() => {
-    const color = theme == 'light' ? 'black' : 'white';
-    setTextColor(color)
-  }, [])
+  const color = theme == 'light' ? 'black' : 'white';
 
 
   return (
     <>
-      <nav className='flex justify-between items-center min-[28rem]:px-4 px-2 py-2 w-dvw z-100 font-poppins absolute top-0' style={{ color: textColor }}>
+      <nav className='flex justify-between items-center min-[28rem]:px-4 px-2 py-2 w-dvw z-100 font-poppins absolute top-0' style={{ color: color }}>
         <div className='flex gap-1 items-center'>
           <img src={logo} alt="" className='w-6 h-6' />
           <span className='font-mrounded font-bold text-xl'>Findoro</span>
         </div>
         <div className='flex items-center min-[28rem]:gap-4 gap-2'>
           <ul className='flex sm:gap-4 gap-2'>
-            <NavLink to='/' className={({ isActive }) => isActive ? "font-medium" : "font-light"} onClick={(isActive) => { if (isActive && textColor != 'black') setTextColor('black') }}>
+            <NavLink to='/' className={({ isActive }) => isActive ? "font-medium" : "font-light"} onClick={(isActive) => { if (isActive && color != 'black') setTextColor('black') }}>
               <li className='text-sm'>Home</li>
             </NavLink>
-            <NavLink to='/lost' className={({ isActive }) => isActive ? "font-medium" : "font-light"} onClick={(isActive) => { if (isActive && textColor != 'white') setTextColor('white') }}>
+            <NavLink to='/lost' className={({ isActive }) => isActive ? "font-medium" : "font-light"} onClick={(isActive) => { if (isActive && color != 'white') setTextColor('white') }}>
               <li className='text-sm '>Lost</li>
             </NavLink>
-            <NavLink to='/found' className={({ isActive }) => isActive ? "font-medium" : "font-light"} onClick={(isActive) => { if (isActive && textColor != 'white') setTextColor('white') }}>
+            <NavLink to='/found' className={({ isActive }) => isActive ? "font-medium" : "font-light"} onClick={(isActive) => { if (isActive && color != 'white') setTextColor('white') }}>
               <li className='text-sm'>Found</li>
             </NavLink>
           </ul>

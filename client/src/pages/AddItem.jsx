@@ -6,7 +6,7 @@ import Navbar from '../components/Navbar';
 import QuickSearchTags from '../components/subComponents/QuickSearchTags';
 import CloseBtn from '../components/subComponents/CloseBtn';
 import { addItem, getItemByID, updateItemByID } from '../api/items';
-import { useAddItemStore } from '../store';
+import { useAddItemStore, useUserStore } from '../store';
 import { useShallow } from 'zustand/react/shallow';
 import DropdownInputField from '../components/subComponents/DropdownInputField';
 
@@ -32,6 +32,8 @@ const AddItem = () => {
         setAll: state.setAll,
       }))
   )
+
+  const userId = useUserStore((state) => state.userId);
 
   useEffect(() => {
 
@@ -89,7 +91,7 @@ const AddItem = () => {
       }
     }
     else {
-      const res = await addItem({ itemInfo, studentInfo, initialStatus, inputFile })
+      const res = await addItem({ itemInfo, studentInfo, initialStatus, inputFile, userId })
       if (res.errors) {
         setErrors(res.errors)
         return
@@ -109,7 +111,7 @@ const AddItem = () => {
     <>
       <div className='w-full min-h-fit h-full pt-12 flex items-center justify-center bg-[#5849B0]'>
         <Navbar theme='dark' />
-        <form action={handleSubmit} className='w-fit h-fit rounded-xl bg-white p-2 flex flex-col gap-2'>
+        <form action={handleSubmit} enctype="multipart/form-data" className='w-fit h-fit rounded-xl bg-white p-2 flex flex-col gap-2'>
           <div className='flex justify-between'>
             <div className='text-sm flex items-center justify-center h-6 w-20 rounded-full text-white' style={{ backgroundColor: initialStatus == 'lost' ? '#E65D5D' : '#6AC25A' }}>{initialStatus.toUpperCase()}</div>
             <CloseBtn onClick={() => { navigate(-1) }} />

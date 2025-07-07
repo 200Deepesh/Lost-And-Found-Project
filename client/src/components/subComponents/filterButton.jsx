@@ -15,11 +15,11 @@ const filterButton = ({ filtername, filtervalue }) => {
     const btn = useRef(null)
 
     useEffect(() => {
-        if (!filter.length) {
-            btn.current.style.fontWeight = 500
-            btn.current.style.border = ''
-            setIsSelected(false)
-        }
+    if (!filter.length) {
+        btn.current.style.fontWeight = 500
+        btn.current.style.border = ''
+        setIsSelected(false)
+    }
     }, [filter])
 
 
