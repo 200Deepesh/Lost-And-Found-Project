@@ -7,6 +7,7 @@ import Signup from './pages/Signup';
 import Signin from './pages/Signin';
 import ItemsInfo from './pages/ItemsInfo';
 import AddItem from './pages/AddItem';
+import Message from './pages/Message';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router';
 import { getCookies } from './api/cookies';
 import { useUserStore } from './store';
@@ -57,6 +58,7 @@ function App() {
           <Route element={<ProtectedRoutes />}>
             <Route path='/item/:id' element={<ItemsInfo />} />
             <Route path='/add/:initialStatus' element={<AddItem />} />
+            <Route path='/message/:id' element={<Message/>} />
           </Route>
         </Routes>
       </BrowserRouter>

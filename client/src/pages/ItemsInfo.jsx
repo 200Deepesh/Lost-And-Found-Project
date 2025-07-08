@@ -10,11 +10,13 @@ import { getItemByID } from '../api/items';
 const ItemsInfo = ({ itemId, deselectItem, isTrusted }) => {
     const navigate = useNavigate()
     const [itemInfo, setItemInfo] = useState();
-
+    console.log("ItemsInfo is rendered", isTrusted);
+    
     useEffect(() => {
         (async () => {
             const itemInfo = await getItemByID(itemId);
             setItemInfo(itemInfo);
+            console.log("fetch data from ItemsInfo");
         })()
     },[])
 
@@ -75,6 +77,12 @@ const ItemsInfo = ({ itemId, deselectItem, isTrusted }) => {
                                     onClick={() => { navigate(`/add/${itemInfo.initialStatus}?id=${itemInfo._id}&edit=${true}`); }}>
                                     Edit
                                 </button>}
+
+                                <button
+                                    className='bg-[#050506CF] rounded-full px-4 py-1 text-white text-xs font-poppins w-fit cursor-pointer'
+                                    onClick={() => { navigate(`/message/${itemInfo._id}`); }}>
+                                    Message
+                                </button>
                             </div>
                         </div>
                     </div>

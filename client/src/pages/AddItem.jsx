@@ -54,7 +54,8 @@ const AddItem = () => {
     })()
 
     return () => {
-      console.log(itemInfo, studentInfo, item)
+      console.log(itemInfo, studentInfo, item);
+      resetAll();
     }
   }, [])
 
@@ -98,7 +99,6 @@ const AddItem = () => {
       }
     }
 
-    resetAll()
     navigate(-1)
   }
 
@@ -190,7 +190,6 @@ const AddItem = () => {
               className='bg-[#050506CF] rounded-full px-4 py-1 text-white text-xs font-poppins cursor-pointer'
               onClick={() => {
                 navigate(-1);
-                resetAll();
                 return 0;
               }}>
               Cancle
